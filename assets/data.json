@@ -1,0 +1,151 @@
+{
+  "week": {
+    "lundi": [
+      {
+        "date": "10/01/2022",
+        "subject": "Analyse des besoins\net\ncahier des charges \nDISTANCIEL",
+        "start": "13:00",
+        "end": "17:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>marxgut philippe",
+        "room": "Aucune",
+        "weekday": "lundi",
+        "bts": false,
+        "remote": true,
+        "link": "https://edtmobiliteng.wigorservices.net/WebPsDyn.aspx?action=posEDTBEECOME&serverID=C&date=01/10/2022&StartMeetingTeams=942417&StartMeetingTeamsHash=20279D7D94287994BD865CF83F40BBCF1F19AF036C8E8ED900502BD0D6DCE2582A17C77D4D31D9F5F89C912195203182ABB8AC24927B9E21BA1DCA979E2F599E&Tel=theo.migeat",
+        "presence": true
+      },
+      {
+        "date": "10/01/2022",
+        "subject": "hep-coopéeration e learning \nDISTANCIEL",
+        "start": "17:00",
+        "end": "19:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>zanconi marcelo",
+        "room": "Aucune",
+        "weekday": "lundi",
+        "bts": false,
+        "remote": true,
+        "link": "https://edtmobiliteng.wigorservices.net/WebPsDyn.aspx?action=posEDTBEECOME&serverID=C&date=01/11/2022&StartMeetingTeams=944697&StartMeetingTeamsHash=F42FAA61F8580BADE4FB7B30C0DF7216B2A4C7731DDA20B3638E3C8CA85052D0252B0A87907D5BE8DD5AF8CE16C668A23280BE7B8DF893DE83AF1C218F849E7D&Tel=theo.migeat",
+        "presence": true
+      },
+      {
+        "date": "10/01/2022",
+        "subject": "Archi générale & logicielle SE\nDISTANCIEL",
+        "start": "08:00",
+        "end": "12:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>carbillet jean-luc",
+        "room": "Aucune",
+        "weekday": "lundi",
+        "bts": false,
+        "remote": true,
+        "link": "https://edtmobiliteng.wigorservices.net/WebPsDyn.aspx?action=posEDTBEECOME&serverID=C&date=01/10/2022&StartMeetingTeams=940733&StartMeetingTeamsHash=103F20F2D74638E912AD44822871DD14A8AD32FBDBFB5F1A417E93A128DFC28467DDE07525E25CCA84D36DEA5762A88FB98D189F8C3D3B6F7D5A5805BD5C7D67&Tel=theo.migeat",
+        "presence": true
+      }
+    ],
+    "mardi": [
+      {
+        "date": "11/01/2022",
+        "subject": "HEP\ncoopération\nDISTANCIEL",
+        "start": "08:00",
+        "end": "10:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>audebert christophe mac henri",
+        "room": "Aucune",
+        "weekday": "mardi",
+        "bts": false,
+        "remote": true,
+        "link": "https://edtmobiliteng.wigorservices.net/WebPsDyn.aspx?action=posEDTBEECOME&serverID=C&date=01/11/2022&StartMeetingTeams=945390&StartMeetingTeamsHash=FEA72B8885D7636B15C95EA3D06FBB13C44475B084C305495B501EB7DCDE2DB821BDD1BB69EC0C1C628B335CD88584C55EE74519B6C7C6D8B99295AFC679B283&Tel=theo.migeat",
+        "presence": true
+      },
+      {
+        "date": "11/01/2022",
+        "subject": "architecture applicative\nDISTANCIEL",
+        "start": "10:00",
+        "end": "12:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>mack mathieu",
+        "room": "Aucune",
+        "weekday": "mardi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      },
+      {
+        "date": "11/01/2022",
+        "subject": "architecture applicative\nDISTANCIEL",
+        "start": "13:00",
+        "end": "17:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>mack mathieu",
+        "room": "Aucune",
+        "weekday": "mardi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      }
+    ],
+    "mercredi": [
+      {
+        "date": "12/01/2022",
+        "subject": "prise en main d'une ERP \nDISTANCIEL",
+        "start": "08:00",
+        "end": "12:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>leloup kim",
+        "room": "Aucune",
+        "weekday": "mercredi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      },
+      {
+        "date": "12/01/2022",
+        "subject": "atelier:\npilotage d'un projet ERP\nDISTANCIEL",
+        "start": "13:00",
+        "end": "17:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>leloup kim",
+        "room": "Aucune",
+        "weekday": "mercredi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      }
+    ],
+    "jeudi": [
+      {
+        "date": "13/01/2022",
+        "subject": "Analyse des besoins & CDC\nDISTANCIEL",
+        "start": "08:00",
+        "end": "12:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>marxgut philippe",
+        "room": "Aucune",
+        "weekday": "jeudi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      }
+    ],
+    "vendredi": [
+      {
+        "date": "14/01/2022",
+        "subject": "Archi générale & logicielle SE\ncv\nDISTANCIEL",
+        "start": "08:00",
+        "end": "12:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>carbillet jean-luc",
+        "room": "Aucune",
+        "weekday": "vendredi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      },
+      {
+        "date": "14/01/2022",
+        "subject": "MSPR BLOC4 cv\nDISTANCIEL",
+        "start": "13:00",
+        "end": "17:00",
+        "professor": "<span style=\"float:right;\"><img height=\"25px\" src=\"http://photo-service.wigorservices.net/WIGOR/CADCOURSMIXTES/Presen_64-64.png\" alt=\"Présenciel\" title=\"Présenciel\"></span>bal rémy ",
+        "room": "Aucune",
+        "weekday": "vendredi",
+        "bts": false,
+        "remote": true,
+        "presence": true
+      }
+    ]
+  },
+  "weekNumber": 2
+}
