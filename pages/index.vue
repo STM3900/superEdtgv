@@ -16,13 +16,15 @@
           >
             <div>
               <div>
-                <section>
+                <section class="edt-time">
+                  {{ tab.start }} - {{ tab.end }}
+                </section>
+                <section class="edt-subject">
                   {{ tab.subject }}
                 </section>
-                <section>
+                <section class="edt-prof">
                   {{ tab.professor }}
                 </section>
-                <section>{{ tab.start }} - {{ tab.end }}</section>
               </div>
             </div>
           </div>
@@ -457,7 +459,7 @@ h1 {
 }
 
 .edt-container {
-  border: solid 1px red;
+  /* border: solid 1px red; */
   max-width: 1500px;
 
   margin-top: 25px;
@@ -483,8 +485,8 @@ h1 {
 .edt-case > div {
   width: calc(20% - 2px);
 
-  margin-top: 45px;
-  height: 90%;
+  margin-top: 36px;
+  height: calc(100% - 37px);
 
   margin-right: 2px;
 
@@ -512,10 +514,29 @@ h1 {
 .edt-case div .cours > div > div {
   font-family: "Quicksand", sans-serif;
   color: white;
-  height: 100%;
+  height: 85%;
   padding: 13px;
 
   text-transform: capitalize;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.edt-time {
+  font-size: 12px;
+}
+
+.edt-subject {
+  align-self: center;
+  text-align: center;
+}
+
+.edt-prof {
+  font-size: 12px;
 }
 
 .edt-case div .filler {
@@ -527,8 +548,10 @@ h1 {
 table {
   width: 100%;
   border-spacing: 0px;
+  min-height: 650px;
 
   font-family: "Quicksand", sans-serif;
+  transition: 0.3s;
 }
 
 thead th {
@@ -538,9 +561,12 @@ thead th {
 }
 
 tbody tr td {
-  border-right: solid 1px #e1e1e1;
   width: 20%;
   padding: 10px;
+}
+
+tbody tr td:not(:last-child) {
+  border-right: solid 1px #e1e1e1;
 }
 
 tbody tr td:first-child {
