@@ -16,7 +16,13 @@
           >
             <div>
               <div>
-                {{ tab.subject }}
+                <section>
+                  {{ tab.subject }}
+                </section>
+                <section>
+                  {{ tab.professor }}
+                </section>
+                <section>{{ tab.start }} - {{ tab.end }}</section>
               </div>
             </div>
           </div>
@@ -419,6 +425,9 @@ export default {
         tabObj.type = "cours";
         tabObj.coursLength = this.getCoursLength(tab[i]);
         tabObj.subject = tab[i].subject;
+        tabObj.professor = this.truncateProfTag(tab[i].professor);
+        tabObj.start = tab[i].start;
+        tabObj.end = tab[i].end;
 
         finalTab.push(tabObj);
         hoursRemaining -= tabObj.coursLength;
@@ -430,6 +439,9 @@ export default {
       }
 
       return finalTab;
+    },
+    truncateProfTag(str) {
+      return str.replace(/ *\<[^)]*\> */g, "");
     },
   },
 };
@@ -471,7 +483,7 @@ h1 {
 .edt-case > div {
   width: calc(20% - 2px);
 
-  margin-top: 50px;
+  margin-top: 45px;
   height: 90%;
 
   margin-right: 2px;
@@ -501,7 +513,9 @@ h1 {
   font-family: "Quicksand", sans-serif;
   color: white;
   height: 100%;
-  padding: 10px;
+  padding: 13px;
+
+  text-transform: capitalize;
 }
 
 .edt-case div .filler {
