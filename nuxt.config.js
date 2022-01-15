@@ -3,7 +3,7 @@ export default {
   head: {
     title: "superEdtgv",
     htmlAttrs: {
-      lang: "en",
+      lang: "fr",
     },
     meta: [
       { charset: "utf-8" },
@@ -25,7 +25,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["@assets/css/style.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
