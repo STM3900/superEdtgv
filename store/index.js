@@ -28,11 +28,23 @@ export const actions = {
     context.commit("SET_STATUS", status);
   },
 
-  fetchEdtdata(context) {
+  fetchCurentWeekEdtdata(context, payload) {
     context.commit("SET_STATUS", "loading");
     this.$axios
       .get(
-        "https://api-calendar.calendz.app/v1/week?firstname=theo&lastname=migeat"
+        `https://api-calendar.calendz.app/v1/week?firstname=${payload.firstname}&lastname=${payload.lastname}`
+      )
+      .then((response) => {
+        context.commit("SET_STATUS", "ready");
+        context.commit("SET_EDT_DATA", response.data);
+      });
+  },
+
+  fetchEdtdata(context, payload) {
+    context.commit("SET_STATUS", "loading");
+    this.$axios
+      .get(
+        `https://api-calendar.calendz.app/v1/week/${payload.date}?firstname=${payload.firstname}&lastname=${payload.lastname}`
       )
       .then((response) => {
         context.commit("SET_STATUS", "ready");
