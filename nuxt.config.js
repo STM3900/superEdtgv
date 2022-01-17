@@ -34,7 +34,25 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+    [
+      "nuxt-fontawesome",
+      {
+        component: "fa", //customize component name
+        imports: [
+          {
+            set: "@fortawesome/free-solid-svg-icons",
+            icons: ["faLink"],
+          },
+          {
+            set: "@fortawesome/free-brands-svg-icons",
+            icons: [],
+          },
+          { set: "@fortawesome/free-regular-svg-icons", icons: [] },
+        ],
+      },
+    ],
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

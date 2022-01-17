@@ -1,8 +1,30 @@
 <template>
   <div>
     <h1>Super EDTGV</h1>
-    <button @click="fetchEdtdata()">Get Data</button>
-    <p>{{ getStatus }}</p>
+    <input type="text" placeholder="Prénom" v-model="person.firstname" />
+    <input type="text" placeholder="Nom" v-model="person.lastname" />
+    <input
+      type="date"
+      placeholder="Date (MM-JJ-AA)"
+      v-model="formDate"
+      @change="prepareDate(formDate)"
+    />
+    <br /><br />
+    <button
+      v-if="!formDate"
+      @click="fetchCurentWeekEdtdata(person)"
+      :disabled="!person.firstname || !person.lastname"
+    >
+      Get current week
+    </button>
+    <button
+      v-else
+      @click="fetchEdtdata(person)"
+      :disabled="!person.firstname || !person.lastname"
+    >
+      Get week
+    </button>
+    <p>Status : {{ getStatus }}</p>
     <article class="edt-container">
       <section v-if="getStatus == 'ready'" class="edt-case">
         <div
@@ -27,7 +49,12 @@
                   {{ tab.subject }}
                 </section>
                 <section class="edt-prof">
-                  {{ tab.professor }}
+                  <span>
+                    {{ tab.professor }}
+                  </span>
+                  <a v-if="tab.link" :href="tab.link" target="_blank">
+                    <fa class="icon-link" icon="link"
+                  /></a>
                 </section>
               </div>
             </div>
@@ -37,108 +64,26 @@
       <table>
         <thead>
           <th>&nbsp;</th>
-          <th>Lundi</th>
-          <th>Mardi</th>
-          <th>Mercredi</th>
-          <th>Jeudi</th>
-          <th>Vendredi</th>
+          <th v-for="(day, i) in weekDays" :key="day">
+            <span :style="{ animationDelay: `${0.3 + 0.07 * i}s` }">
+              {{ day }}
+            </span>
+            <span
+              v-if="getStatus == 'ready'"
+              :style="{ animationDelay: `${0.1 * i}s` }"
+              >{{ getDateOfDay(i) }}</span
+            >
+          </th>
         </thead>
         <tbody>
-          <tr>
-            <td>8h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>9h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>10h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>11h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>12h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>13h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>14h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>15h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>16h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>17h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>18h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>19h</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr v-for="i in 12" :key="i">
+            <td
+              class="table-hours"
+              :style="{ animationDelay: `${0.4 + 0.07 * i}s` }"
+            >
+              {{ i + 7 }}h
+            </td>
+            <td v-for="i in 5" :key="i" class="table-normal-columns"></td>
           </tr>
         </tbody>
       </table>
@@ -155,11 +100,53 @@ export default {
     ...mapGetters(["getStatus", "getEdtData"]),
   },
   data() {
-            date: "10/01/2022",
-    return {};
+    return {
+      person: {
+        firstname: "",
+        lastname: "",
+        date: "",
+      },
+      formDate: "",
+      formYear: "2022",
+      weekDays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
+    };
   },
   methods: {
-    ...mapActions(["changeStatus", "fetchEdtdata"]),
+    ...mapActions(["changeStatus", "fetchCurentWeekEdtdata", "fetchEdtdata"]),
+    getDateOfDay(index) {
+      let startDate = this.getDateOfISOWeek(
+        this.getEdtData.weekNumber,
+        this.formYear
+      );
+      startDate.setDate(startDate.getDate() + index);
+
+      return this.formatDate(startDate);
+    },
+    formatDate(d) {
+      return [d.getDate(), d.getMonth() + 1]
+        .map((n) => (n < 10 ? `0${n}` : `${n}`))
+        .join("/");
+    },
+    getDateOfISOWeek(w, y) {
+      var simple = new Date(y, 0, 1 + (w - 1) * 7);
+      var dow = simple.getDay();
+      var ISOweekStart = simple;
+      if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+      else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+      return ISOweekStart;
+    },
+    prepareDate(date) {
+      // MM-JJ-AA
+      this.formYear = date.substring(0, 4);
+      const year = date.slice(2, 4);
+
+      date = date.substring(5);
+      date = `${date}-${year}`;
+
+      this.person.date = date;
+    },
+
     convertTimeToInt(time) {
       return +time.substring(0, 2);
     },
@@ -185,7 +172,12 @@ export default {
 
       for (let i = 0; i < tab.length; i++) {
         let tabObj = {};
-        if (previousCours) {
+        if (i == 0 && this.convertTimeToInt(tab[i].start) != 8) {
+          const timeBeforeCours = this.convertTimeToInt(tab[i].start) - 8;
+
+          finalTab.push({ type: "filler", coursLength: timeBeforeCours });
+          hoursRemaining -= timeBeforeCours;
+        } else if (previousCours) {
           const timeBetweenCours =
             this.convertTimeToInt(tab[i].start) -
             this.convertTimeToInt(previousCours.end);
@@ -200,6 +192,7 @@ export default {
         tabObj.professor = this.truncateProfTag(tab[i].professor);
         tabObj.start = tab[i].start;
         tabObj.end = tab[i].end;
+        tabObj.link = tab[i].link;
 
         finalTab.push(tabObj);
         hoursRemaining -= tabObj.coursLength;
@@ -312,6 +305,17 @@ h1 {
 
 .edt-prof {
   font-size: 12px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.edt-prof a {
+  color: white;
 }
 
 .edt-case div .filler {
@@ -335,6 +339,14 @@ thead th {
   font-size: 20px;
 }
 
+thead th span,
+.table-normal-columns {
+  transition: 0.3s;
+  transform: translateX(-5px);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
 tbody tr td {
   width: 20%;
   padding: 10px;
@@ -346,6 +358,13 @@ tbody tr td:not(:last-child) {
 
 tbody tr td:first-child {
   width: auto;
+}
+
+.table-hours {
+  transition: 0.3s;
+  transform: translateX(-5px);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
 }
 
 @keyframes fadeIn {
