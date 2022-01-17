@@ -32,6 +32,20 @@
       Get week
     </button>
     <button @click="resetStorage">reset localstorage</button>
+    <br /><br />
+    <article class="color-preference">
+      <span v-for="(color, i) in edtColors" :key="color.normal">
+        <input
+          type="radio"
+          :id="`radio${i}`"
+          :class="`color${i + 1}`"
+          :value="color"
+          v-model="selectedColor"
+          @change="saveColor"
+          style="background: red"
+        />
+      </span>
+    </article>
     <p>Status : {{ getStatus }}</p>
     <article class="edt-container">
       <section v-if="getStatus == 'ready'" class="edt-case">
@@ -48,8 +62,8 @@
               height: `calc(100% / 12 * ${tab.coursLength})`,
             }"
           >
-            <div>
-              <div>
+            <div :style="{ background: selectedColor.normal }">
+              <div :style="{ color: selectedColor.dark }">
                 <section class="edt-time">
                   {{ tab.start }} - {{ tab.end }}
                 </section>
@@ -60,9 +74,14 @@
                   <span>
                     {{ tab.professor }}
                   </span>
-                  <a v-if="tab.link" :href="tab.link" target="_blank">
-                    <fa class="icon-link" icon="link"
-                  /></a>
+                  <a
+                    v-if="tab.link"
+                    :href="tab.link"
+                    target="_blank"
+                    :style="{ color: selectedColor.dark }"
+                  >
+                    <fa class="icon-link" icon="link" />
+                  </a>
                 </section>
               </div>
             </div>
@@ -117,9 +136,45 @@ export default {
       formDate: "",
       formYear: "2022",
       weekDays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
+      edtColors: [
+        {
+          normal: "hsl(0, 70%, 75%)",
+          dark: "hsl(0, 70%, 15%)",
+        },
+        {
+          normal: "hsl(60, 70%, 75%)",
+          dark: "hsl(60, 70%, 15%)",
+        },
+        {
+          normal: "hsl(100, 70%, 75%)",
+          dark: "hsl(100, 70%, 15%)",
+        },
+        {
+          normal: "hsl(170, 70%, 75%)",
+          dark: "hsl(170, 70%, 15%)",
+        },
+        {
+          normal: "hsl(200, 70%, 75%)",
+          dark: "hsl(200, 70%, 15%)",
+        },
+        {
+          normal: "hsl(250, 70%, 75%)",
+          dark: "hsl(250, 70%, 15%)",
+        },
+        {
+          normal: "hsl(330, 70%, 75%)",
+          dark: "hsl(330, 70%, 15%)",
+        },
+      ],
+      selectedColor: {},
     };
   },
   mounted() {
+    this.selectedColor = JSON.parse(localStorage.getItem("userColor")) ?? {
+      normal: "hsl(200, 70%, 75%)",
+      dark: "hsl(200, 70%, 15%)",
+    };
+
     if (localStorage.getItem("user")) {
       this.person = JSON.parse(localStorage.getItem("user"));
       if (localStorage.getItem("userDate")) {
@@ -235,6 +290,9 @@ export default {
       localStorage.setItem("user", JSON.stringify(this.person));
       localStorage.setItem("userDate", JSON.stringify(this.formDate));
     },
+    saveColor() {
+      localStorage.setItem("userColor", JSON.stringify(this.selectedColor));
+    },
     resetStorage() {
       localStorage.clear();
     },
@@ -251,6 +309,80 @@ h1 {
   font-family: "Quicksand", sans-serif;
 }
 
+/* color form */
+
+input[type="radio"] {
+  width: 15px;
+  height: 15px;
+  transition: 0.3s;
+}
+
+input[type="radio"]:checked {
+  transform: scale(0.7);
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+input[type="radio"]:not(:checked):hover {
+  transform: scale(0.95);
+}
+
+input[type="radio"]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  transition: 0.3s;
+  border: 2px solid white;
+}
+
+input[type="radio"]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+}
+
+.color1:after {
+  background: hsl(0, 70%, 75%);
+}
+
+.color2:after {
+  background: hsl(60, 70%, 75%);
+}
+
+.color3:after {
+  background: hsl(100, 70%, 75%);
+}
+
+.color4:after {
+  background: hsl(170, 70%, 75%);
+}
+
+.color5:after {
+  background: hsl(200, 70%, 75%);
+}
+
+.color6:after {
+  background: hsl(250, 70%, 75%);
+}
+
+.color7:after {
+  background: hsl(330, 70%, 75%);
+}
+
+/* edt */
 .edt-container {
   /* border: solid 1px red; */
   max-width: 1500px;
@@ -303,7 +435,8 @@ h1 {
 }
 
 .edt-case div .cours > div {
-  background: #1689be;
+  /* background: #1689be; */
+  transition: 0.3s;
   border-radius: 5px;
   height: 100%;
 
@@ -347,7 +480,7 @@ h1 {
 }
 
 .edt-prof a {
-  color: white;
+  transition: 0.3s;
 }
 
 .edt-case div .filler {
