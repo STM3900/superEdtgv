@@ -9,21 +9,29 @@
       v-model="formDate"
       @change="prepareDate(formDate)"
     />
+
     <br /><br />
     <button
       v-if="!formDate"
-      @click="fetchCurentWeekEdtdata(person)"
+      @click="
+        fetchCurentWeekEdtdata(person);
+        saveName();
+      "
       :disabled="!person.firstname || !person.lastname"
     >
       Get current week
     </button>
     <button
       v-else
-      @click="fetchEdtdata(person)"
+      @click="
+        fetchEdtdata(person);
+        saveName();
+      "
       :disabled="!person.firstname || !person.lastname"
     >
       Get week
     </button>
+    <button @click="resetStorage">reset localstorage</button>
     <p>Status : {{ getStatus }}</p>
     <article class="edt-container">
       <section v-if="getStatus == 'ready'" class="edt-case">
@@ -110,6 +118,21 @@ export default {
       formYear: "2022",
       weekDays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
     };
+  },
+  mounted() {
+    if (localStorage.getItem("user")) {
+      this.person = JSON.parse(localStorage.getItem("user"));
+      if (localStorage.getItem("userDate")) {
+        this.formDate = JSON.parse(localStorage.getItem("userDate"));
+      }
+
+      setTimeout(() => {
+        !localStorage.getItem("userDate")
+          ? (this.prepareDate(this.formDate),
+            this.fetchCurentWeekEdtdata(this.person))
+          : this.fetchEdtdata(this.person);
+      }, 1000);
+    }
   },
   methods: {
     ...mapActions(["changeStatus", "fetchCurentWeekEdtdata", "fetchEdtdata"]),
@@ -208,6 +231,13 @@ export default {
     truncateProfTag(str) {
       return str.replace(/ *\<[^)]*\> */g, "");
     },
+    saveName() {
+      localStorage.setItem("user", JSON.stringify(this.person));
+      localStorage.setItem("userDate", JSON.stringify(this.formDate));
+    },
+    resetStorage() {
+      localStorage.clear();
+    },
   },
 };
 </script>
@@ -243,6 +273,8 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   align-content: center;
+
+  z-index: 2;
 }
 
 .edt-case > div {
@@ -331,6 +363,7 @@ table {
 
   font-family: "Quicksand", sans-serif;
   transition: 0.3s;
+  z-index: 1;
 }
 
 thead th {
