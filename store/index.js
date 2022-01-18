@@ -1,6 +1,7 @@
 export const state = () => ({
   status: "idle",
   edtData: [],
+  selectedColor: {},
 });
 
 export const getters = {
@@ -11,6 +12,10 @@ export const getters = {
   getEdtData: (state) => {
     return state.edtData;
   },
+
+  getSelectedColor: (state) => {
+    return state.selectedColor;
+  },
 };
 
 export const mutations = {
@@ -20,6 +25,10 @@ export const mutations = {
 
   SET_EDT_DATA(state, edtData) {
     state.edtData = edtData;
+  },
+
+  SET_SELECTED_COLOR(state, selectedColor) {
+    state.selectedColor = selectedColor;
   },
 };
 
@@ -50,5 +59,9 @@ export const actions = {
         context.commit("SET_STATUS", "ready");
         context.commit("SET_EDT_DATA", response.data);
       });
+  },
+
+  changeSelectedColor(context, selectedColor) {
+    context.commit("SET_SELECTED_COLOR", selectedColor);
   },
 };

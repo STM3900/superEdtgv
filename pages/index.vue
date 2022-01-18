@@ -32,20 +32,8 @@
       Get week
     </button>
     <button @click="resetStorage">reset localstorage</button>
+    <ColorChanger />
     <br /><br />
-    <article class="color-preference">
-      <span v-for="(color, i) in edtColors" :key="color.normal">
-        <input
-          type="radio"
-          :id="`radio${i}`"
-          :class="`color${i + 1}`"
-          :value="color"
-          v-model="selectedColor"
-          @change="saveColor"
-          style="background: red"
-        />
-      </span>
-    </article>
     <p>Status : {{ getStatus }}</p>
     <article class="edt-container">
       <section v-if="getStatus == 'ready'" class="edt-case">
@@ -62,8 +50,8 @@
               height: `calc(100% / 12 * ${tab.coursLength})`,
             }"
           >
-            <div :style="{ background: selectedColor.normal }">
-              <div :style="{ color: selectedColor.dark }">
+            <div :style="{ background: getSelectedColor.normal }">
+              <div :style="{ color: getSelectedColor.dark }">
                 <section class="edt-time">
                   {{ tab.start }} - {{ tab.end }}
                 </section>
@@ -78,7 +66,7 @@
                     v-if="tab.link"
                     :href="tab.link"
                     target="_blank"
-                    :style="{ color: selectedColor.dark }"
+                    :style="{ color: getSelectedColor.dark }"
                   >
                     <fa class="icon-link" icon="link" />
                   </a>
@@ -120,11 +108,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import ColorChanger from "~/components/ColorChanger.vue";
 
 export default {
   name: "IndexPage",
   computed: {
-    ...mapGetters(["getStatus", "getEdtData"]),
+    ...mapGetters(["getStatus", "getEdtData", "getSelectedColor"]),
   },
   data() {
     return {
@@ -136,45 +125,9 @@ export default {
       formDate: "",
       formYear: "2022",
       weekDays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
-      edtColors: [
-        {
-          normal: "hsl(0, 70%, 75%)",
-          dark: "hsl(0, 70%, 15%)",
-        },
-        {
-          normal: "hsl(60, 70%, 75%)",
-          dark: "hsl(60, 70%, 15%)",
-        },
-        {
-          normal: "hsl(100, 70%, 75%)",
-          dark: "hsl(100, 70%, 15%)",
-        },
-        {
-          normal: "hsl(170, 70%, 75%)",
-          dark: "hsl(170, 70%, 15%)",
-        },
-        {
-          normal: "hsl(200, 70%, 75%)",
-          dark: "hsl(200, 70%, 15%)",
-        },
-        {
-          normal: "hsl(250, 70%, 75%)",
-          dark: "hsl(250, 70%, 15%)",
-        },
-        {
-          normal: "hsl(330, 70%, 75%)",
-          dark: "hsl(330, 70%, 15%)",
-        },
-      ],
-      selectedColor: {},
     };
   },
   mounted() {
-    this.selectedColor = JSON.parse(localStorage.getItem("userColor")) ?? {
-      normal: "hsl(200, 70%, 75%)",
-      dark: "hsl(200, 70%, 15%)",
-    };
-
     if (localStorage.getItem("user")) {
       this.person = JSON.parse(localStorage.getItem("user"));
       if (localStorage.getItem("userDate")) {
@@ -289,9 +242,6 @@ export default {
     saveName() {
       localStorage.setItem("user", JSON.stringify(this.person));
       localStorage.setItem("userDate", JSON.stringify(this.formDate));
-    },
-    saveColor() {
-      localStorage.setItem("userColor", JSON.stringify(this.selectedColor));
     },
     resetStorage() {
       localStorage.clear();
