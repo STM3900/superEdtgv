@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Super EDTGV</h1>
+    <HeyMessage :name="person.firstname" :color="getSelectedColor.normal" />
     <input type="text" placeholder="Prénom" v-model="person.firstname" />
     <input type="text" placeholder="Nom" v-model="person.lastname" />
     <input
