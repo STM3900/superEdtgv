@@ -5,7 +5,7 @@
       :key="color.normal"
       type="radio"
       :id="`radio${i}`"
-      :class="`color${i + 1}`"
+      :class="`color${i + 1} color-radio`"
       :value="color"
       v-model="selectedColorForm"
       @change="saveColor"
@@ -81,24 +81,24 @@ export default {
 </script>
 
 <style scoped>
-input[type="radio"] {
+.color-radio {
   width: 15px;
   height: 15px;
   transition: 0.3s;
 }
 
-input[type="radio"]:checked {
+.color-radio:checked {
   transform: scale(0.7);
 }
 
-input[type="radio"]:hover {
+.color-radio:hover {
   cursor: pointer;
 }
-input[type="radio"]:not(:checked):hover {
+.color-radio:not(:checked):hover {
   transform: scale(0.95);
 }
 
-input[type="radio"]:after {
+.color-radio:after {
   width: 15px;
   height: 15px;
   border-radius: 20px;
@@ -112,7 +112,7 @@ input[type="radio"]:after {
   border: 2px solid white;
 }
 
-input[type="radio"]:checked:after {
+.color-radio:checked:after {
   width: 15px;
   height: 15px;
   border-radius: 20px;

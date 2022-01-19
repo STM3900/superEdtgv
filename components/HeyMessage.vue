@@ -2,7 +2,14 @@
   <div>
     <h1>
       {{ greetingsBefore }}
-      <span :style="{ color: color }"> {{ name }}</span
+      <span
+        :style="{ color: color }"
+        @click="
+          changeTogglePanel(!getTogglePanel);
+          savePanel();
+        "
+      >
+        {{ name }}</span
       >,
       {{ greetingsAfter }}
     </h1>
@@ -61,14 +68,19 @@ export default {
   mounted() {
     this.greetingsBefore = this.getRandom(this.greetingsListBefore);
     this.greetingsAfter = this.getRandom(this.greetingsListAfter);
+
+    this.changeTogglePanel(JSON.parse(localStorage.getItem("toggle")));
   },
   computed: {
-    ...mapGetters(["getSelectedColor"]),
+    ...mapGetters(["getTogglePanel"]),
   },
   methods: {
-    ...mapActions(["changeSelectedColor"]),
+    ...mapActions(["changeSelectedColor", "changeTogglePanel"]),
     getRandom(tab) {
       return tab[Math.floor(Math.random() * tab.length)];
+    },
+    savePanel() {
+      localStorage.setItem("toggle", this.getTogglePanel);
     },
   },
 };
@@ -81,5 +93,12 @@ h1 {
 }
 span {
   text-transform: capitalize;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+span:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 </style>

@@ -1,41 +1,80 @@
 <template>
   <div>
     <h1>Super EDTGV</h1>
-    <HeyMessage :name="person.firstname" :color="getSelectedColor.normal" />
-    <input type="text" placeholder="Prénom" v-model="person.firstname" />
-    <input type="text" placeholder="Nom" v-model="person.lastname" />
-    <input
-      type="date"
-      placeholder="Date (MM-JJ-AA)"
-      v-model="formDate"
-      @change="prepareDate(formDate)"
+    <HeyMessage
+      v-if="person.firstname"
+      :name="person.firstname"
+      :color="getSelectedColor.normal"
     />
+    <article
+      :class="
+        getTogglePanel
+          ? 'person-form-show person-form'
+          : 'person-form-hide person-form'
+      "
+    >
+      <section>
+        <div>
+          <label for="firstname">Prénom</label>
+          <input type="text" id="firstname" v-model="person.firstname" />
+        </div>
+        <div>
+          <label for="lastname">Nom</label>
+          <input type="text" id="lastname" v-model="person.lastname" />
+        </div>
+        <div>
+          <label for="date">Date</label>
+          <input
+            type="date"
+            id=""
+            date
+            v-model="formDate"
+            @change="prepareDate(formDate)"
+          />
+        </div>
+      </section>
+      <button
+        v-if="!formDate"
+        @click="
+          fetchCurentWeekEdtdata(formatName(person));
+          saveName();
+        "
+        :disabled="!person.firstname || !person.lastname"
+        :style="{
+          background: getSelectedColor.normal,
+          color: getSelectedColor.dark,
+          borderColor: getSelectedColor.normal,
+        }"
+      >
+        Chercher la semaine en cours
+      </button>
+      <button
+        v-else
+        @click="
+          fetchEdtdata(formatName(person));
+          saveName();
+        "
+        :disabled="!person.firstname || !person.lastname"
+        :style="{
+          background: getSelectedColor.normal,
+          color: getSelectedColor.dark,
+          borderColor: getSelectedColor.normal,
+        }"
+      >
+        Chercher
+      </button>
+      <button
+        @click="resetStorage"
+        :style="{
+          color: getSelectedColor.dark,
+          borderColor: getSelectedColor.normal,
+        }"
+      >
+        Réinitialiser les préférences
+      </button>
+      <ColorChanger />
+    </article>
 
-    <br /><br />
-    <button
-      v-if="!formDate"
-      @click="
-        fetchCurentWeekEdtdata(person);
-        saveName();
-      "
-      :disabled="!person.firstname || !person.lastname"
-    >
-      Get current week
-    </button>
-    <button
-      v-else
-      @click="
-        fetchEdtdata(person);
-        saveName();
-      "
-      :disabled="!person.firstname || !person.lastname"
-    >
-      Get week
-    </button>
-    <button @click="resetStorage">reset localstorage</button>
-    <ColorChanger />
-    <br /><br />
-    <p>Status : {{ getStatus }}</p>
     <article class="edt-container">
       <section v-if="getStatus == 'ready'" class="edt-case">
         <div
@@ -114,7 +153,12 @@ import ColorChanger from "~/components/ColorChanger.vue";
 export default {
   name: "IndexPage",
   computed: {
-    ...mapGetters(["getStatus", "getEdtData", "getSelectedColor"]),
+    ...mapGetters([
+      "getStatus",
+      "getEdtData",
+      "getSelectedColor",
+      "getTogglePanel",
+    ]),
   },
   data() {
     return {
@@ -138,8 +182,8 @@ export default {
       setTimeout(() => {
         !localStorage.getItem("userDate")
           ? (this.prepareDate(this.formDate),
-            this.fetchCurentWeekEdtdata(this.person))
-          : this.fetchEdtdata(this.person);
+            this.fetchCurentWeekEdtdata(this.formatName(this.person)))
+          : this.fetchEdtdata(this.formatName(this.person));
       }, 1000);
     }
   },
@@ -153,11 +197,6 @@ export default {
       startDate.setDate(startDate.getDate() + index);
 
       return this.formatDate(startDate);
-    },
-    formatDate(d) {
-      return [d.getDate(), d.getMonth() + 1]
-        .map((n) => (n < 10 ? `0${n}` : `${n}`))
-        .join("/");
     },
     getDateOfISOWeek(w, y) {
       var simple = new Date(y, 0, 1 + (w - 1) * 7);
@@ -178,7 +217,11 @@ export default {
 
       this.person.date = date;
     },
-
+    formatDate(d) {
+      return [d.getDate(), d.getMonth() + 1]
+        .map((n) => (n < 10 ? `0${n}` : `${n}`))
+        .join("/");
+    },
     convertTimeToInt(time) {
       return +time.substring(0, 2);
     },
@@ -240,6 +283,19 @@ export default {
     truncateProfTag(str) {
       return str.replace(/ *\<[^)]*\> */g, "");
     },
+    formatString(string) {
+      return string
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+    },
+    formatName(person) {
+      return {
+        firstname: this.formatString(person.firstname),
+        lastname: this.formatString(person.lastname),
+        date: person.date,
+      };
+    },
     saveName() {
       localStorage.setItem("user", JSON.stringify(this.person));
       localStorage.setItem("userDate", JSON.stringify(this.formDate));
@@ -260,77 +316,98 @@ h1 {
   font-family: "Quicksand", sans-serif;
 }
 
-/* color form */
+/* person form */
+.person-form-show {
+  height: 120px;
+  opacity: 1;
+  padding: 20px;
+}
 
-input[type="radio"] {
-  width: 15px;
-  height: 15px;
+.person-form-hide {
+  height: 0;
+  opacity: 0;
+  padding: 0px 20px;
+}
+
+.person-form {
+  overflow: hidden;
+  width: 50%;
+
   transition: 0.3s;
+  border: solid 1px #e1e1e1;
+
+  border-radius: 5px;
 }
 
-input[type="radio"]:checked {
-  transform: scale(0.7);
+.person-form section {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+
+  gap: 20px;
+
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-input[type="radio"]:hover {
+.person-form section div {
+  position: relative;
+}
+
+.person-form section input {
+  font-family: "Quicksand", sans-serif;
+
+  /* haut | droit | bas | gauche */
+  padding: 5px 2px 2px 2px;
+
+  font-size: 16px;
+  border: none;
+  border-bottom: solid 1px black;
+
+  outline: none;
+}
+
+.person-form section input[type="date"] {
+  /* haut | droit | bas | gauche */
+  padding: 4px 2px 1px 2px;
+}
+
+.person-form section label {
+  font-family: "Quicksand", sans-serif;
+  position: absolute;
+  top: -8px;
+  font-size: 10px;
+}
+
+.person-form button {
+  font-family: "Quicksand", sans-serif;
+
+  background: none;
+  transition: 0.3s;
+  padding: 8px 15px;
+
+  border-radius: 5px;
+  border: none;
+  border: solid 1px;
+
+  margin-bottom: 10px;
+}
+
+.person-form button:disabled {
+  opacity: 0.5;
+  transform: scale(0.99);
+}
+
+.person-form button:not(:active):not(:disabled):hover {
   cursor: pointer;
-}
-input[type="radio"]:not(:checked):hover {
-  transform: scale(0.95);
+  transform: scale(0.99);
 }
 
-input[type="radio"]:after {
-  width: 15px;
-  height: 15px;
-  border-radius: 20px;
-  top: -2px;
-  left: -1px;
-  position: relative;
-  content: "";
-  display: inline-block;
-  visibility: visible;
-  transition: 0.3s;
-  border: 2px solid white;
-}
-
-input[type="radio"]:checked:after {
-  width: 15px;
-  height: 15px;
-  border-radius: 20px;
-  top: -2px;
-  left: -1px;
-  position: relative;
-  content: "";
-  display: inline-block;
-  visibility: visible;
-}
-
-.color1:after {
-  background: hsl(0, 70%, 75%);
-}
-
-.color2:after {
-  background: hsl(60, 70%, 75%);
-}
-
-.color3:after {
-  background: hsl(100, 70%, 75%);
-}
-
-.color4:after {
-  background: hsl(170, 70%, 75%);
-}
-
-.color5:after {
-  background: hsl(200, 70%, 75%);
-}
-
-.color6:after {
-  background: hsl(250, 70%, 75%);
-}
-
-.color7:after {
-  background: hsl(330, 70%, 75%);
+.person-form button:active {
+  transform: scale(0.93);
 }
 
 /* edt */
@@ -361,9 +438,8 @@ input[type="radio"]:checked:after {
 }
 
 .edt-case > div {
-  width: calc(20% - 2px);
-
   margin-top: 36px;
+  width: calc(20% - 2px);
   height: calc(100% - 37px);
 
   margin-right: 2px;

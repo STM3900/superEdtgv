@@ -2,6 +2,7 @@ export const state = () => ({
   status: "idle",
   edtData: [],
   selectedColor: {},
+  togglePanel: false,
 });
 
 export const getters = {
@@ -16,6 +17,10 @@ export const getters = {
   getSelectedColor: (state) => {
     return state.selectedColor;
   },
+
+  getTogglePanel: (state) => {
+    return state.togglePanel;
+  },
 };
 
 export const mutations = {
@@ -29,6 +34,10 @@ export const mutations = {
 
   SET_SELECTED_COLOR(state, selectedColor) {
     state.selectedColor = selectedColor;
+  },
+
+  SET_TOGGLE_PANEL(state, togglePanel) {
+    state.togglePanel = togglePanel;
   },
 };
 
@@ -63,5 +72,9 @@ export const actions = {
 
   changeSelectedColor(context, selectedColor) {
     context.commit("SET_SELECTED_COLOR", selectedColor);
+  },
+
+  changeTogglePanel(context, togglePanel) {
+    context.commit("SET_TOGGLE_PANEL", togglePanel);
   },
 };
