@@ -1,11 +1,7 @@
 <template>
   <div>
     <h1>Super EDTGV</h1>
-    <HeyMessage
-      v-if="person.firstname"
-      :name="person.firstname"
-      :color="getSelectedColor.normal"
-    />
+    <HeyMessage :name="person.firstname" :color="getSelectedColor.normal" />
     <article
       :class="
         getTogglePanel
@@ -70,7 +66,7 @@
           borderColor: getSelectedColor.normal,
         }"
       >
-        Réinitialiser les préférences
+        Réinitialiser tes préférences
       </button>
       <ColorChanger />
     </article>

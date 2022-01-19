@@ -3,13 +3,13 @@
     <h1>
       {{ greetingsBefore }}
       <span
-        :style="{ color: color }"
+        :style="{ color: getTextColor }"
         @click="
           changeTogglePanel(!getTogglePanel);
           savePanel();
         "
       >
-        {{ name }}</span
+        {{ getText }}</span
       >,
       {{ greetingsAfter }}
     </h1>
@@ -69,10 +69,18 @@ export default {
     this.greetingsBefore = this.getRandom(this.greetingsListBefore);
     this.greetingsAfter = this.getRandom(this.greetingsListAfter);
 
-    this.changeTogglePanel(JSON.parse(localStorage.getItem("toggle")));
+    if (JSON.parse(localStorage.getItem("toggle"))) {
+      this.changeTogglePanel(JSON.parse(localStorage.getItem("toggle")));
+    }
   },
   computed: {
     ...mapGetters(["getTogglePanel"]),
+    getText() {
+      return !this.name ? "Toi" : this.name;
+    },
+    getTextColor() {
+      return !this.name ? "rgb(175, 175, 175)" : this.color;
+    },
   },
   methods: {
     ...mapActions(["changeSelectedColor", "changeTogglePanel"]),
