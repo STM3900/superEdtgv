@@ -445,48 +445,72 @@ h1 {
   margin: 0;
   margin-right: 3px;
 
-  border: 1px solid rgb(100, 100, 100);
   padding: 7px;
-  border-radius: 2px;
+  border-radius: 4px;
 
   display: inline-block;
   position: relative;
   transition: 0.3s;
 }
 
+.cache-class input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+.cache-class .color1 {
+  border: 1px solid hsl(0, 70%, 75%);
+}
+
 .cache-class .color1:checked {
-  background-color: hsl(0, 70%, 75%);
-  border-color: hsl(0, 70%, 15%);
+  background-color: hsl(0, 70%, 85%);
+}
+
+.cache-class .color2 {
+  border: 1px solid hsl(60, 70%, 75%);
 }
 
 .cache-class .color2:checked {
-  background-color: hsl(60, 70%, 75%);
-  border-color: hsl(60, 70%, 15%);
+  background-color: hsl(60, 70%, 85%);
+}
+
+.cache-class .color3 {
+  border: 1px solid hsl(100, 70%, 75%);
 }
 
 .cache-class .color3:checked {
-  background-color: hsl(100, 70%, 75%);
-  border-color: hsl(100, 70%, 15%);
+  background-color: hsl(100, 70%, 85%);
+}
+
+.cache-class .color4 {
+  border: 1px solid hsl(170, 70%, 75%);
 }
 
 .cache-class .color4:checked {
-  background-color: hsl(170, 70%, 75%);
-  border-color: hsl(170, 70%, 15%);
+  background-color: hsl(170, 70%, 85%);
+}
+
+.cache-class .color5 {
+  border: 1px solid hsl(200, 70%, 75%);
 }
 
 .cache-class .color5:checked {
-  background-color: hsl(200, 70%, 75%);
-  border-color: hsl(200, 70%, 15%);
+  background-color: hsl(200, 70%, 85%);
+}
+
+.cache-class .color6 {
+  border: 1px solid hsl(250, 70%, 75%);
 }
 
 .cache-class .color6:checked {
-  background-color: hsl(250, 70%, 75%);
-  border-color: hsl(250, 70%, 15%);
+  background-color: hsl(250, 70%, 85%);
+}
+
+.cache-class .color7 {
+  border: 1px solid hsl(330, 70%, 75%);
 }
 
 .cache-class .color7:checked {
-  background-color: hsl(330, 70%, 75%);
-  border-color: hsl(330, 70%, 15%);
+  background-color: hsl(330, 70%, 85%);
 }
 
 .cache-class input[type="checkbox"]:checked:after {
