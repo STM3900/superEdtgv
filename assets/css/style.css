@@ -32,6 +32,9 @@ body {
   align-content: center;
 
   transition: 0.3s;
+  transform: translateX(-5px);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
 }
 
 .edt-case div .cours {
@@ -61,4 +64,15 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   align-content: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(-5px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
 }

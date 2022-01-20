@@ -87,46 +87,7 @@
     </article>
 
     <article class="edt-container">
-      <section v-if="getStatus == 'ready'" class="edt-case">
-        <div
-          v-for="(cours, i) in generateAllCours(getEdtData.week)"
-          :key="i"
-          :style="{ animationDelay: `${0.1 * i}s` }"
-        >
-          <div
-            v-for="(tab, i) in cours"
-            :key="i"
-            :class="tab.type == 'cours' ? 'cours' : 'filler'"
-            :style="{
-              height: `calc(100% / 12 * ${tab.coursLength})`,
-            }"
-          >
-            <div :style="{ background: getSelectedColor.normal }">
-              <div :style="{ color: getSelectedColor.dark }">
-                <section class="edt-time">
-                  {{ tab.start }} - {{ tab.end }}
-                </section>
-                <section class="edt-subject">
-                  {{ tab.subject }}
-                </section>
-                <section class="edt-prof">
-                  <span>
-                    {{ tab.professor }}
-                  </span>
-                  <a
-                    v-if="tab.link"
-                    :href="tab.link"
-                    target="_blank"
-                    :style="{ color: getSelectedColor.dark }"
-                  >
-                    <fa class="icon-link" icon="link" />
-                  </a>
-                </section>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EdtReady v-if="getStatus == 'ready'" class="edt-case-animation" />
       <EdtLoading v-show="getStatus == 'loading'" class="edt-case-animation" />
       <EdtError v-if="getStatus == 'error'" class="edt-case-animation" />
       <table>
