@@ -292,7 +292,7 @@ export default {
 /* RESPONSIVE */
 @media screen and (max-width: 670px) {
   .person-form-show {
-    max-height: 400px; /* à changer */
+    max-height: 250px; /* à changer */
   }
 }
 
@@ -312,16 +312,24 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .person-form-show {
+    padding: 20px 15px;
+  }
+
   .person-form section label {
     font-size: 8px;
   }
 
   .person-form section input {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .person-form button {
     font-size: 12px;
+  }
+
+  .person-form section div:last-child label {
+    top: -9px;
   }
 }
 </style>

@@ -97,15 +97,29 @@ body {
   border-radius: 3px;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 1780px) {
   body {
     margin-right: 5%;
     margin-left: 5%;
   }
 }
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 1265px) {
+  .edt-case {
+    width: 1200px;
+  }
+}
+
+@media screen and (max-width: 1320px) {
   body {
-    margin-right: 5%;
-    margin-left: 5%;
+    margin-right: 3%;
+    margin-left: 3%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .edt-case > div {
+    width: calc(20% - 12px);
+    margin-right: 3px;
   }
 }

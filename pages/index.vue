@@ -48,7 +48,9 @@ body {
 
 /* edt */
 .edt-container {
-  max-width: 1500px;
+  width: 100%;
+  overflow: hidden;
+
   margin-top: 25px;
   position: relative;
 }
@@ -67,6 +69,12 @@ body {
   100% {
     transform: translateX(0px);
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1265px) {
+  .edt-container {
+    overflow: auto;
   }
 }
 </style>

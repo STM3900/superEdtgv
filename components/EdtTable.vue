@@ -71,7 +71,6 @@ export default {
 
 <style scoped>
 table {
-  width: 100%;
   border-spacing: 0px;
   min-height: 650px;
 
@@ -112,5 +111,21 @@ tbody tr td:first-child {
   transform: translateX(-5px);
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
+}
+
+@media screen and (max-width: 1265px) {
+  table {
+    width: 1200px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  thead th {
+    font-size: 18px;
+  }
+
+  tbody tr td {
+    font-size: 14px;
+  }
 }
 </style>

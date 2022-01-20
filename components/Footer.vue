@@ -32,6 +32,7 @@ footer {
   color: rgb(50, 50, 50);
   font-size: 14px;
   transition: 0.3s;
+  margin-bottom: 25px;
 }
 
 footer a {
@@ -67,6 +68,12 @@ footer a {
   84%,
   100% {
     color: rgb(82, 153, 211);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  footer {
+    font-size: 12px;
   }
 }
 </style>

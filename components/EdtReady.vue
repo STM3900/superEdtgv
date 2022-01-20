@@ -158,4 +158,18 @@ export default {
   transition: 0.3s;
   margin-right: 30px;
 }
+
+@media screen and (max-width: 400px) {
+  .edt-time {
+    font-size: 10px;
+  }
+
+  .edt-subject {
+    font-size: 14px;
+  }
+
+  .edt-prof {
+    font-size: 10px;
+  }
+}
 </style>

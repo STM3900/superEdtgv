@@ -1,18 +1,24 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "superEdtgv",
+    title: "Super EDTGV",
     htmlAttrs: {
       lang: "fr",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "Marre d'un edt moche ? Avec EDTGV, accéder à vos cours à tout instant, sans que ce soit moche.",
+      },
       { name: "format-detection", content: "telephone=no" },
+      { name: "theme-color", content: "#93ceec" },
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.svg" },
       {
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
@@ -68,4 +74,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  router: {
+    base: "/superedtgv/",
+  },
 };
