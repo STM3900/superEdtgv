@@ -4,6 +4,11 @@ export const state = () => ({
   selectedColor: {},
   togglePanel: false,
   cacheActivate: false,
+  person: {
+    firstname: "",
+    lastname: "",
+    date: "",
+  },
 });
 
 export const getters = {
@@ -26,6 +31,22 @@ export const getters = {
   getCacheActivate: (state) => {
     return state.cacheActivate;
   },
+
+  getPerson: (state) => {
+    return state.person;
+  },
+
+  getPersonFirstName: (state) => {
+    return state.person.firstname;
+  },
+
+  getPersonLastName: (state) => {
+    return state.person.lastname;
+  },
+
+  getPersonDate: (state) => {
+    return state.person.date;
+  },
 };
 
 export const mutations = {
@@ -47,6 +68,22 @@ export const mutations = {
 
   SET_CACHE_ACTIVATE(state, cacheActivate) {
     state.cacheActivate = cacheActivate;
+  },
+
+  SET_PERSON(state, person) {
+    state.person = person;
+  },
+
+  SET_PERSON_FIRSTNAME(state, firstname) {
+    state.person.firstname = firstname;
+  },
+
+  SET_PERSON_LASTNAME(state, lastname) {
+    state.person.lastname = lastname;
+  },
+
+  SET_PERSON_DATE(state, date) {
+    state.person.date = date;
   },
 };
 
@@ -107,5 +144,11 @@ export const actions = {
 
   changeCacheActivate(context, cacheActivate) {
     context.commit("SET_CACHE_ACTIVATE", cacheActivate);
+  },
+
+  changePerson(context, payload) {
+    context.commit(payload.label, payload.data);
+
+    // payload.type == "firstname" ? context.commit("SET_PERSON_LASTNAME", payload.data) : payload.type == "lastname" ? context.commit("SET_PERSON_FIRSTNAME", payload.data);
   },
 };

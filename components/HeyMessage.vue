@@ -21,10 +21,6 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "HeyMessage",
-  props: {
-    name: String,
-    color: String,
-  },
   data() {
     return {
       greetingsBefore: "",
@@ -74,12 +70,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getTogglePanel"]),
+    ...mapGetters(["getTogglePanel", "getPersonFirstName", "getSelectedColor"]),
     getText() {
-      return !this.name ? "Toi" : this.name;
+      return !this.getPersonFirstName ? "Toi" : this.getPersonFirstName;
     },
     getTextColor() {
-      return !this.name ? "rgb(175, 175, 175)" : this.color;
+      return !this.getPersonFirstName
+        ? "rgb(175, 175, 175)"
+        : this.getSelectedColor.normal;
     },
   },
   methods: {
