@@ -2,7 +2,6 @@
   <div>
     <h1>Super EDTGV</h1>
     <HeyMessage :name="person.firstname" :color="getSelectedColor.normal" />
-    <p>{{ getStatus }}</p>
     <article
       :class="
         getTogglePanel
@@ -394,7 +393,7 @@ h1 {
 
 .person-form {
   overflow: hidden;
-  width: 50%;
+  max-width: 725px;
 
   transition: 0.3s;
   border: solid 1px #e1e1e1;
