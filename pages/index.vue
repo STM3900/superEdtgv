@@ -109,7 +109,6 @@ export default {
   computed: {
     ...mapGetters([
       "getStatus",
-      "getEdtData",
       "getSelectedColor",
       "getTogglePanel",
       "getCacheActivate",
@@ -132,7 +131,6 @@ export default {
       },
       formDate: "",
       formYear: "2022",
-      weekDays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
     };
   },
   mounted() {
@@ -160,6 +158,7 @@ export default {
       "fetchCurentWeekEdtdata",
       "fetchEdtdata",
       "changeCacheActivate",
+      "changeSelectedColor",
     ]),
 
     prepareDate(date) {
@@ -193,6 +192,14 @@ export default {
       localStorage.setItem("userCache", this.getCacheActivate);
     },
     resetStorage() {
+      this.person = { firstname: "", lastname: "", date: "" };
+      this.formDate = "";
+      this.formYear = "2022";
+      this.changeSelectedColor({
+        normal: "hsl(200, 70%, 75%)",
+        dark: "hsl(200, 70%, 15%)",
+        class: "color5",
+      });
       localStorage.clear();
     },
   },
