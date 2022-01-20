@@ -66,8 +66,10 @@ export const actions = {
         }`
       )
       .then((response) => {
-        Object.keys(response.data.week).length
-          ? context.commit("SET_STATUS", "ready")
+        response.data.week
+          ? Object.keys(response.data.week).length
+            ? context.commit("SET_STATUS", "ready")
+            : context.commit("SET_STATUS", "error")
           : context.commit("SET_STATUS", "error");
 
         context.commit("SET_EDT_DATA", response.data);
@@ -85,8 +87,10 @@ export const actions = {
         }`
       )
       .then((response) => {
-        Object.keys(response.data.week).length
-          ? context.commit("SET_STATUS", "ready")
+        response.data.week
+          ? Object.keys(response.data.week).length
+            ? context.commit("SET_STATUS", "ready")
+            : context.commit("SET_STATUS", "error")
           : context.commit("SET_STATUS", "error");
 
         context.commit("SET_EDT_DATA", response.data);
