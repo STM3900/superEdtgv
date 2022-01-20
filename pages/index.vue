@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h1>Super EDTGV</h1>
-    <HeyMessage :name="person.firstname" :color="getSelectedColor.normal" />
+    <Header />
+    <HeyMessage
+      class="edt-case-animation"
+      :name="person.firstname"
+      :color="getSelectedColor.normal"
+    />
     <article
       :class="
         getTogglePanel
@@ -90,33 +94,9 @@
       <EdtReady v-if="getStatus == 'ready'" class="edt-case-animation" />
       <EdtLoading v-show="getStatus == 'loading'" class="edt-case-animation" />
       <EdtError v-if="getStatus == 'error'" class="edt-case-animation" />
-      <table>
-        <thead>
-          <th>&nbsp;</th>
-          <th v-for="(day, i) in weekDays" :key="day">
-            <span :style="{ animationDelay: `${0.3 + 0.07 * i}s` }">
-              {{ day }}
-            </span>
-            <span
-              v-if="getStatus == 'ready'"
-              :style="{ animationDelay: `${0.1 * i}s` }"
-              >{{ getDateOfDay(i) }}</span
-            >
-          </th>
-        </thead>
-        <tbody>
-          <tr v-for="i in 12" :key="i">
-            <td
-              class="table-hours"
-              :style="{ animationDelay: `${0.4 + 0.07 * i}s` }"
-            >
-              {{ i + 7 }}h
-            </td>
-            <td v-for="i in 5" :key="i" class="table-normal-columns"></td>
-          </tr>
-        </tbody>
-      </table>
+      <EdtTable :formYear="formYear" />
     </article>
+    <Footer />
   </div>
 </template>
 
@@ -181,24 +161,7 @@ export default {
       "fetchEdtdata",
       "changeCacheActivate",
     ]),
-    getDateOfDay(index) {
-      let startDate = this.getDateOfISOWeek(
-        this.getEdtData.weekNumber,
-        this.formYear
-      );
-      startDate.setDate(startDate.getDate() + index);
 
-      return this.formatDate(startDate);
-    },
-    getDateOfISOWeek(w, y) {
-      var simple = new Date(y, 0, 1 + (w - 1) * 7);
-      var dow = simple.getDay();
-      var ISOweekStart = simple;
-      if (dow <= 4)
-        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
-      else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
-      return ISOweekStart;
-    },
     prepareDate(date) {
       // MM-JJ-AA
       this.formYear = date.substring(0, 4);
@@ -208,11 +171,6 @@ export default {
       date = `${date}-${year}`;
 
       this.person.date = date;
-    },
-    formatDate(d) {
-      return [d.getDate(), d.getMonth() + 1]
-        .map((n) => (n < 10 ? `0${n}` : `${n}`))
-        .join("/");
     },
     formatString(string) {
       return string
@@ -243,10 +201,6 @@ export default {
 
 <style scoped>
 body {
-  font-family: "Quicksand", sans-serif;
-}
-
-h1 {
   font-family: "Quicksand", sans-serif;
 }
 
@@ -461,50 +415,6 @@ h1 {
 }
 
 .edt-case-animation {
-  transform: translateX(-5px);
-  opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-table {
-  width: 100%;
-  border-spacing: 0px;
-  min-height: 650px;
-
-  font-family: "Quicksand", sans-serif;
-  transition: 0.3s;
-  z-index: 1;
-}
-
-thead th {
-  text-align: left;
-  padding-bottom: 10px;
-  font-size: 20px;
-}
-
-thead th span,
-.table-normal-columns {
-  transition: 0.3s;
-  transform: translateX(-5px);
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-tbody tr td {
-  width: 20%;
-  padding: 10px;
-}
-
-tbody tr td:not(:last-child) {
-  border-right: solid 1px #e1e1e1;
-}
-
-tbody tr td:first-child {
-  width: auto;
-}
-
-.table-hours {
-  transition: 0.3s;
   transform: translateX(-5px);
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
