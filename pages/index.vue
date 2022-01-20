@@ -29,46 +29,61 @@
           />
         </div>
       </section>
-      <button
-        v-if="!formDate"
-        @click="
-          fetchCurentWeekEdtdata(formatName(person));
-          saveName();
-        "
-        :disabled="!person.firstname || !person.lastname"
-        :style="{
-          background: getSelectedColor.normal,
-          color: getSelectedColor.dark,
-          borderColor: getSelectedColor.normal,
-        }"
-      >
-        Chercher la semaine en cours
-      </button>
-      <button
-        v-else
-        @click="
-          fetchEdtdata(formatName(person));
-          saveName();
-        "
-        :disabled="!person.firstname || !person.lastname"
-        :style="{
-          background: getSelectedColor.normal,
-          color: getSelectedColor.dark,
-          borderColor: getSelectedColor.normal,
-        }"
-      >
-        Chercher
-      </button>
-      <button
-        @click="resetStorage"
-        :style="{
-          color: getSelectedColor.dark,
-          borderColor: getSelectedColor.normal,
-        }"
-      >
-        Réinitialiser tes préférences
-      </button>
-      <ColorChanger />
+      <div>
+        <button
+          v-if="!formDate"
+          @click="
+            fetchCurentWeekEdtdata(formatName(person));
+            saveName();
+          "
+          :disabled="!person.firstname || !person.lastname"
+          :style="{
+            background: getSelectedColor.normal,
+            color: getSelectedColor.dark,
+            borderColor: getSelectedColor.normal,
+          }"
+        >
+          Chercher la semaine en cours
+        </button>
+        <button
+          v-else
+          @click="
+            fetchEdtdata(formatName(person));
+            saveName();
+          "
+          :disabled="!person.firstname || !person.lastname"
+          :style="{
+            background: getSelectedColor.normal,
+            color: getSelectedColor.dark,
+            borderColor: getSelectedColor.normal,
+          }"
+        >
+          Chercher
+        </button>
+        <button
+          @click="resetStorage"
+          :style="{
+            color: getSelectedColor.dark,
+            borderColor: getSelectedColor.normal,
+          }"
+        >
+          Réinitialiser tes préférences
+        </button>
+      </div>
+
+      <div class="color-wrapper">
+        <ColorChanger />
+        <div class="cache-class">
+          <label for="cacheCheckbox">Désactiver le cache</label>
+          <input
+            type="checkbox"
+            id="cacheCheckbox"
+            :class="getSelectedColor.class"
+            v-model="cacheActivateCheckbox"
+            @change="saveCache()"
+          />
+        </div>
+      </div>
     </article>
 
     <article class="edt-container">
@@ -109,6 +124,29 @@
                 </section>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section v-show="getStatus == 'loading'" class="edt-case">
+        <div v-for="i in 5" :key="i">
+          <div
+            v-for="(item, i) in getRandomPlaceHolder()"
+            :key="i"
+            class="placeholder"
+          >
+            <div v-if="item">
+              <content-placeholders :rounded="true">
+                <content-placeholders-heading :img="false" />
+                <content-placeholders-text :lines="2" />
+              </content-placeholders>
+            </div>
+            <div
+              v-else
+              class="filler"
+              :style="{
+                height: '110px',
+              }"
+            ></div>
           </div>
         </div>
       </section>
@@ -154,7 +192,16 @@ export default {
       "getEdtData",
       "getSelectedColor",
       "getTogglePanel",
+      "getCacheActivate",
     ]),
+    cacheActivateCheckbox: {
+      get() {
+        return this.getCacheActivate;
+      },
+      set(status) {
+        this.changeCacheActivate(status);
+      },
+    },
   },
   data() {
     return {
@@ -175,6 +222,10 @@ export default {
         this.formDate = JSON.parse(localStorage.getItem("userDate"));
       }
 
+      this.changeCacheActivate(
+        JSON.parse(localStorage.getItem("userCache")) ?? false
+      );
+
       setTimeout(() => {
         !localStorage.getItem("userDate")
           ? (this.prepareDate(this.formDate),
@@ -184,7 +235,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["changeStatus", "fetchCurentWeekEdtdata", "fetchEdtdata"]),
+    ...mapActions([
+      "changeStatus",
+      "fetchCurentWeekEdtdata",
+      "fetchEdtdata",
+      "changeCacheActivate",
+    ]),
     getDateOfDay(index) {
       let startDate = this.getDateOfISOWeek(
         this.getEdtData.weekNumber,
@@ -296,8 +352,14 @@ export default {
       localStorage.setItem("user", JSON.stringify(this.person));
       localStorage.setItem("userDate", JSON.stringify(this.formDate));
     },
+    saveCache() {
+      localStorage.setItem("userCache", this.getCacheActivate);
+    },
     resetStorage() {
       localStorage.clear();
+    },
+    getRandomPlaceHolder() {
+      return [true, true, false, false].sort((a, b) => 0.5 - Math.random());
     },
   },
 };
@@ -312,15 +374,15 @@ h1 {
   font-family: "Quicksand", sans-serif;
 }
 
-/* person form */
+/* person form 120*/
 .person-form-show {
-  height: 120px;
+  max-height: 120px;
   opacity: 1;
   padding: 20px;
 }
 
 .person-form-hide {
-  height: 0;
+  max-height: 0;
   opacity: 0;
   padding: 0px 20px;
 }
@@ -352,6 +414,91 @@ h1 {
 .person-form section div {
   position: relative;
 }
+
+.color-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.cache-class {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.cache-class label {
+  font-family: "Quicksand", sans-serif;
+  margin: 0;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* pour la checkbox */
+
+.cache-class input[type="checkbox"] {
+  -webkit-appearance: none;
+  margin: 0;
+  margin-right: 3px;
+
+  border: 1px solid rgb(100, 100, 100);
+  padding: 7px;
+  border-radius: 2px;
+
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+.cache-class .color1:checked {
+  background-color: hsl(0, 70%, 75%);
+  border-color: hsl(0, 70%, 15%);
+}
+
+.cache-class .color2:checked {
+  background-color: hsl(60, 70%, 75%);
+  border-color: hsl(60, 70%, 15%);
+}
+
+.cache-class .color3:checked {
+  background-color: hsl(100, 70%, 75%);
+  border-color: hsl(100, 70%, 15%);
+}
+
+.cache-class .color4:checked {
+  background-color: hsl(170, 70%, 75%);
+  border-color: hsl(170, 70%, 15%);
+}
+
+.cache-class .color5:checked {
+  background-color: hsl(200, 70%, 75%);
+  border-color: hsl(200, 70%, 15%);
+}
+
+.cache-class .color6:checked {
+  background-color: hsl(250, 70%, 75%);
+  border-color: hsl(250, 70%, 15%);
+}
+
+.cache-class .color7:checked {
+  background-color: hsl(330, 70%, 75%);
+  border-color: hsl(330, 70%, 15%);
+}
+
+.cache-class input[type="checkbox"]:checked:after {
+  content: ""; /* \2714 */
+  font-size: 8px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: white;
+}
+
+/* */
 
 .person-form section input {
   font-family: "Quicksand", sans-serif;
@@ -412,7 +559,7 @@ h1 {
   max-width: 1500px;
 
   margin-top: 25px;
-  margin-left: 20px;
+
   position: relative;
 }
 
@@ -482,6 +629,17 @@ h1 {
   align-content: center;
 }
 
+.edt-case div .placeholder {
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+.edt-case div .placeholder > div {
+  padding: 13px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
 .edt-time {
   font-size: 12px;
 }
@@ -508,7 +666,6 @@ h1 {
 
 .edt-case div .filler {
   visibility: hidden;
-
   width: 100%;
 }
 

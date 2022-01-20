@@ -24,30 +24,37 @@ export default {
         {
           normal: "hsl(0, 70%, 75%)",
           dark: "hsl(0, 70%, 15%)",
+          class: "color1",
         },
         {
           normal: "hsl(60, 70%, 75%)",
           dark: "hsl(60, 70%, 15%)",
+          class: "color2",
         },
         {
           normal: "hsl(100, 70%, 75%)",
           dark: "hsl(100, 70%, 15%)",
+          class: "color3",
         },
         {
           normal: "hsl(170, 70%, 75%)",
           dark: "hsl(170, 70%, 15%)",
+          class: "color4",
         },
         {
           normal: "hsl(200, 70%, 75%)",
           dark: "hsl(200, 70%, 15%)",
+          class: "color5",
         },
         {
           normal: "hsl(250, 70%, 75%)",
           dark: "hsl(250, 70%, 15%)",
+          class: "color6",
         },
         {
           normal: "hsl(330, 70%, 75%)",
           dark: "hsl(330, 70%, 15%)",
+          class: "color7",
         },
       ],
     };
@@ -57,6 +64,7 @@ export default {
       JSON.parse(localStorage.getItem("userColor")) ?? {
         normal: "hsl(200, 70%, 75%)",
         dark: "hsl(200, 70%, 15%)",
+        class: "color5",
       }
     );
   },

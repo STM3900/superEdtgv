@@ -3,6 +3,7 @@ export const state = () => ({
   edtData: [],
   selectedColor: {},
   togglePanel: false,
+  cacheActivate: false,
 });
 
 export const getters = {
@@ -20,6 +21,10 @@ export const getters = {
 
   getTogglePanel: (state) => {
     return state.togglePanel;
+  },
+
+  getCacheActivate: (state) => {
+    return state.cacheActivate;
   },
 };
 
@@ -39,6 +44,10 @@ export const mutations = {
   SET_TOGGLE_PANEL(state, togglePanel) {
     state.togglePanel = togglePanel;
   },
+
+  SET_CACHE_ACTIVATE(state, cacheActivate) {
+    state.cacheActivate = cacheActivate;
+  },
 };
 
 export const actions = {
@@ -50,7 +59,11 @@ export const actions = {
     context.commit("SET_STATUS", "loading");
     this.$axios
       .get(
-        `https://api-calendar.calendz.app/v1/week?firstname=${payload.firstname}&lastname=${payload.lastname}`
+        `https://api-calendar.calendz.app/v1/week?firstname=${
+          payload.firstname
+        }&lastname=${payload.lastname}${
+          context.state.cacheActivate ? "&ignoreCache=true" : ""
+        }`
       )
       .then((response) => {
         context.commit("SET_STATUS", "ready");
@@ -59,10 +72,16 @@ export const actions = {
   },
 
   fetchEdtdata(context, payload) {
+    console.log(context.state.cacheActivate);
+
     context.commit("SET_STATUS", "loading");
     this.$axios
       .get(
-        `https://api-calendar.calendz.app/v1/week/${payload.date}?firstname=${payload.firstname}&lastname=${payload.lastname}`
+        `https://api-calendar.calendz.app/v1/week/${payload.date}?firstname=${
+          payload.firstname
+        }&lastname=${payload.lastname}${
+          context.state.cacheActivate ? "&ignoreCache=true" : ""
+        }`
       )
       .then((response) => {
         context.commit("SET_STATUS", "ready");
@@ -76,5 +95,9 @@ export const actions = {
 
   changeTogglePanel(context, togglePanel) {
     context.commit("SET_TOGGLE_PANEL", togglePanel);
+  },
+
+  changeCacheActivate(context, cacheActivate) {
+    context.commit("SET_CACHE_ACTIVATE", cacheActivate);
   },
 };
