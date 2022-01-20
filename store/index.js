@@ -66,7 +66,10 @@ export const actions = {
         }`
       )
       .then((response) => {
-        context.commit("SET_STATUS", "ready");
+        Object.keys(response.data.week).length
+          ? context.commit("SET_STATUS", "ready")
+          : context.commit("SET_STATUS", "error");
+
         context.commit("SET_EDT_DATA", response.data);
       });
   },
@@ -84,7 +87,10 @@ export const actions = {
         }`
       )
       .then((response) => {
-        context.commit("SET_STATUS", "ready");
+        Object.keys(response.data.week).length
+          ? context.commit("SET_STATUS", "ready")
+          : context.commit("SET_STATUS", "error");
+
         context.commit("SET_EDT_DATA", response.data);
       });
   },
