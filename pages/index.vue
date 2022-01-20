@@ -150,10 +150,7 @@
           </div>
         </div>
       </section>
-      <section v-show="getStatus == 'error'" class="edt-case-error">
-        <h3>Pas de cours !</h3>
-        <p>(Ou alors mauvaise saisie)</p>
-      </section>
+      <EdtError v-show="getStatus == 'error'" class="edt-case-animation" />
       <table>
         <thead>
           <th>&nbsp;</th>
@@ -588,40 +585,10 @@ h1 {
   position: relative;
 }
 
-.edt-case-error {
-  position: absolute;
-
-  width: calc(100% - 45px);
-  margin-left: 45px;
-
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-
-  z-index: 2;
-  transition: 0.3s;
+.edt-case-animation {
   transform: translateX(-5px);
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
-}
-
-.edt-case-error h3 {
-  font-family: "Quicksand", sans-serif;
-  font-size: 20px;
-  margin: 0;
-  color: rgb(50, 50, 50);
-}
-
-.edt-case-error p {
-  font-family: "Quicksand", sans-serif;
-  color: rgb(150, 150, 150);
-  font-size: 14px;
-  margin-top: 3px;
-  font-style: italic;
 }
 
 .edt-case {

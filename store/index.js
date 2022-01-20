@@ -75,8 +75,6 @@ export const actions = {
   },
 
   fetchEdtdata(context, payload) {
-    console.log(context.state.cacheActivate);
-
     context.commit("SET_STATUS", "loading");
     this.$axios
       .get(
