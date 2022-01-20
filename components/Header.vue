@@ -31,6 +31,10 @@ header h1 {
   font-size: 18px;
 }
 
+header h1 span {
+  color: hsl(200, 70%, 75%);
+}
+
 header h1 span .icon-logo {
   font-size: 10px;
   margin-left: -4px;

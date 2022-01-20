@@ -1,10 +1,11 @@
 <template>
   <div>
-    <Header />
+    <Header class="edt-case-animation" />
     <HeyMessage
       class="edt-case-animation"
       :name="person.firstname"
       :color="getSelectedColor.normal"
+      :style="{ animationDelay: '0.3s' }"
     />
     <article
       :class="
@@ -62,7 +63,7 @@
             borderColor: getSelectedColor.normal,
           }"
         >
-          Chercher
+          Chercher la semaine
         </button>
         <button
           @click="resetStorage"
@@ -96,7 +97,7 @@
       <EdtError v-if="getStatus == 'error'" class="edt-case-animation" />
       <EdtTable :formYear="formYear" />
     </article>
-    <Footer />
+    <Footer class="edt-case-animation" />
   </div>
 </template>
 
@@ -200,6 +201,7 @@ export default {
         dark: "hsl(200, 70%, 15%)",
         class: "color5",
       });
+      this.changeStatus("idle");
       localStorage.clear();
     },
   },
