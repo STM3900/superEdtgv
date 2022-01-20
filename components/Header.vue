@@ -40,4 +40,27 @@ header h1 span .icon-logo {
   margin-left: -4px;
   margin-bottom: 3px;
 }
+
+@media screen and (max-width: 460px) {
+  header h1 {
+    font-size: 16px;
+  }
+
+  header h1 span .icon-logo {
+    margin-left: -4px;
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  header h1 {
+    font-size: 14px;
+  }
+
+  header h1 span .icon-logo {
+    font-size: 8px;
+    margin-left: -3px;
+    margin-bottom: 2px;
+  }
+}
 </style>

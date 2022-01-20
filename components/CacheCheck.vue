@@ -143,5 +143,17 @@ export default {
   color: white;
 }
 
-/* */
+@media screen and (max-width: 400px) {
+  .cache-class label {
+    font-size: 12px;
+  }
+
+  .cache-class input[type="checkbox"] {
+    padding: 7px;
+  }
+
+  .cache-class label {
+    text-align: right;
+  }
+}
 </style>

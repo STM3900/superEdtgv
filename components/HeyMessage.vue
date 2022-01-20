@@ -107,4 +107,16 @@ span:hover {
   cursor: pointer;
   opacity: 0.8;
 }
+
+@media screen and (max-width: 460px) {
+  h1 {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 20px;
+  }
+}
 </style>

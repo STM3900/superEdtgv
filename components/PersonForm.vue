@@ -288,4 +288,40 @@ export default {
 .person-form button:active {
   transform: scale(0.93);
 }
+
+/* RESPONSIVE */
+@media screen and (max-width: 670px) {
+  .person-form-show {
+    max-height: 400px; /* à changer */
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .person-form section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .person-form section div {
+    width: 100%;
+  }
+
+  .person-form section input {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .person-form section label {
+    font-size: 8px;
+  }
+
+  .person-form section input {
+    font-size: 14px;
+  }
+
+  .person-form button {
+    font-size: 12px;
+  }
+}
 </style>
