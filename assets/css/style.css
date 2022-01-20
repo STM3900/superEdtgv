@@ -16,6 +16,8 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   align-content: center;
+
+  z-index: 10;
 }
 
 .edt-case > div {
@@ -49,19 +51,20 @@ body {
 
   margin-left: 3px;
   margin-right: 3px;
+
+  position: relative;
 }
 
 .edt-case div .cours > div > div {
   font-family: "Quicksand", sans-serif;
   color: white;
-  height: 85%;
-  padding: 13px;
+  height: 100%;
 
   text-transform: capitalize;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   align-content: center;
 }

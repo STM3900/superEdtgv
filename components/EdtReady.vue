@@ -126,11 +126,17 @@ export default {
 <style scoped>
 .edt-time {
   font-size: 12px;
+  padding: 13px;
+  position: absolute;
+  top: 0;
 }
 
 .edt-subject {
   align-self: center;
   text-align: center;
+
+  padding-left: 13px;
+  padding-right: 13px;
 }
 
 .edt-prof {
@@ -142,9 +148,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  padding: 13px;
+
+  position: absolute;
+  bottom: 0;
 }
 
 .edt-prof a {
   transition: 0.3s;
+  margin-right: 30px;
 }
 </style>
