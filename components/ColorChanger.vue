@@ -93,6 +93,9 @@ export default {
   width: 15px;
   height: 15px;
   transition: 0.3s;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .color-radio:checked {

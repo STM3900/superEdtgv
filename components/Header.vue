@@ -29,6 +29,7 @@ header {
 header h1 {
   font-family: "Quicksand", sans-serif;
   font-size: 18px;
+  font-weight: 500;
 }
 
 header h1 span {

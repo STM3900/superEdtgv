@@ -96,6 +96,7 @@ export default {
 h1 {
   font-family: "Quicksand", sans-serif;
   font-size: 30px;
+  font-weight: 500;
 }
 span {
   text-transform: capitalize;

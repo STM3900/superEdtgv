@@ -83,6 +83,7 @@ thead th {
   text-align: left;
   padding-bottom: 10px;
   font-size: 20px;
+  font-weight: 500;
 }
 
 thead th span,
