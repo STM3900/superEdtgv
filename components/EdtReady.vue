@@ -48,20 +48,56 @@ import { mapGetters } from "vuex";
 export default {
   name: "EdtReady",
   data() {
-    return {};
+    return {
+      referenceTable: {
+        lundi: 1,
+        mardi: 2,
+        mercredi: 3,
+        jeudi: 4,
+        vendredi: 5,
+      },
+      referenceNameTab: ["lundi", "mardi", "mercredi", "jeudi", "vendredi"],
+    };
   },
   computed: {
     ...mapGetters(["getEdtData", "getSelectedColor"]),
   },
   methods: {
+    getreference(ref) {
+      return this.referenceTable[ref];
+    },
     generateAllCours(tab) {
       tab = Object.entries(tab);
+      const orderTab = [];
+      const daysTab = [];
 
-      let finalTab = [];
+      const finalTab = [];
+
       for (let i = 0; i < tab.length; i++) {
-        finalTab.push(this.generateTab(tab[i][1]));
+        daysTab.push(tab[i][0]);
       }
 
+      for (let i = 0; i < 5; i++) {
+        orderTab.push(
+          daysTab.includes(this.referenceNameTab[i]) ? true : false
+        );
+      }
+
+      let counter = 0;
+
+      for (let i = 0; i < this.referenceNameTab.length; i++) {
+        finalTab.push(
+          orderTab[i]
+            ? this.generateTab(tab[counter][1])
+            : { type: "filler", coursLength: 1 }
+        );
+
+        if (orderTab[i]) {
+          counter++;
+        }
+      }
+
+      console.log(finalTab);
       return finalTab;
     },
     convertTimeToInt(time) {
