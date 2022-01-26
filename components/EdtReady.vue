@@ -100,8 +100,11 @@ export default {
       console.log(finalTab);
       return finalTab;
     },
-    convertTimeToInt(time) {
-      return +time.substring(0, 2);
+    convertTimeToFloat(time) {
+      const hoursMinutes = time.split(/[.:]/);
+      let hours = parseInt(hoursMinutes[0], 10);
+      let minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+      return hours + minutes / 60;
     },
     generateTab(tab) {
       const tabFunc = tab.slice();
@@ -113,15 +116,15 @@ export default {
 
       for (let i = 0; i < tabFunc.length; i++) {
         let tabObj = {};
-        if (i == 0 && this.convertTimeToInt(tabFunc[i].start) != 8) {
-          const timeBeforeCours = this.convertTimeToInt(tabFunc[i].start) - 8;
+        if (i == 0 && this.convertTimeToFloat(tabFunc[i].start) != 8) {
+          const timeBeforeCours = this.convertTimeToFloat(tabFunc[i].start) - 8;
 
           finalTab.push({ type: "filler", coursLength: timeBeforeCours });
           hoursRemaining -= timeBeforeCours;
         } else if (previousCours) {
           const timeBetweenCours =
-            this.convertTimeToInt(tabFunc[i].start) -
-            this.convertTimeToInt(previousCours.end);
+            this.convertTimeToFloat(tabFunc[i].start) -
+            this.convertTimeToFloat(previousCours.end);
           if (timeBetweenCours > 0) {
             finalTab.push({ type: "filler", coursLength: timeBetweenCours });
             hoursRemaining -= timeBetweenCours;
@@ -149,7 +152,8 @@ export default {
     },
     getCoursLength(cours) {
       return (
-        this.convertTimeToInt(cours.end) - this.convertTimeToInt(cours.start)
+        this.convertTimeToFloat(cours.end) -
+        this.convertTimeToFloat(cours.start)
       );
     },
     truncateProfTag(str) {
