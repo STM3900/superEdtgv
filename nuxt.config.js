@@ -34,7 +34,7 @@ export default {
   css: ["@assets/css/style.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/placeholder.js"],
+  plugins: ["~/plugins/placeholder.js", "~plugins/GoogleAnalytics.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -58,6 +58,7 @@ export default {
         ],
       },
     ],
+    "@nuxtjs/dotenv",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
