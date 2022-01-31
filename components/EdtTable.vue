@@ -19,7 +19,7 @@
           class="table-hours"
           :style="{ animationDelay: `${0.4 + 0.07 * i}s` }"
         >
-          {{ i + 7 }}h
+          <p>{{ i + 7 }}h</p>
         </td>
         <td v-for="i in 5" :key="i" class="table-normal-columns"></td>
       </tr>
@@ -105,6 +105,13 @@ tbody tr td:not(:last-child) {
 
 tbody tr td:first-child {
   width: auto;
+  padding: 0px 10px 20px 10px;
+  text-align: right;
+}
+
+tbody tr td:first-child p {
+  margin: 0;
+  margin-top: -15px;
 }
 
 .table-hours {
