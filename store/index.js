@@ -3,7 +3,7 @@ export const state = () => ({
   edtData: [],
   selectedColor: {},
   togglePanel: false,
-  cacheActivate: false,
+  cacheActivate: true,
   person: {
     firstname: "",
     lastname: "",

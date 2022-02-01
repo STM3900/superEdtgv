@@ -38,6 +38,11 @@ export default {
       formYear: "2022",
     };
   },
+  mounted() {
+    !localStorage.getItem("newVersion")
+      ? localStorage.clear()
+      : localStorage.setItem("newVersion", true);
+  },
 };
 </script>
 

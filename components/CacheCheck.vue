@@ -32,7 +32,7 @@ export default {
   },
   mounted() {
     this.changeCacheActivate(
-      JSON.parse(localStorage.getItem("userCache")) ?? false
+      JSON.parse(localStorage.getItem("userCache")) ?? true
     );
   },
   methods: {
