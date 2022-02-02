@@ -56,9 +56,18 @@ export default {
         .map((n) => (n < 10 ? `0${n}` : `${n}`))
         .join("/");
     },
+    getWeekNumber(d) {
+      d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+
+      let yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+      let weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+
+      return [d.getUTCFullYear(), weekNo];
+    },
     getDateOfDay(index) {
       let startDate = this.getDateOfISOWeek(
-        this.getEdtData.weekNumber,
+        this.getEdtData.weekNumber ?? this.getWeekNumber(new Date())[1],
         this.formYear
       );
       startDate.setDate(startDate.getDate() + index);
