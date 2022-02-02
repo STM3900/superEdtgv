@@ -97,7 +97,6 @@ export default {
         }
       }
 
-      console.log(finalTab);
       return finalTab;
     },
     convertTimeToFloat(time) {
