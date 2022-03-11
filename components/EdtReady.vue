@@ -19,12 +19,24 @@
         >
           <div :style="{ color: getSelectedColor.dark }">
             <section class="edt-time">{{ tab.start }} - {{ tab.end }}</section>
-            <section class="edt-subject">
+            <section
+              class="edt-subject"
+              :style="
+                tab.coursLength == 2
+                  ? 'margin-bottom: 10px;'
+                  : tab.coursLength == 1
+                  ? 'margin-left: 100px;'
+                  : ''
+              "
+            >
               {{ tab.subject }}
             </section>
             <section class="edt-prof">
               <span>
                 {{ tab.professor }}
+                <p v-if="tab.coursLength > 1" class="room-small">
+                  {{ tab.room }}
+                </p>
               </span>
               <a
                 v-if="tab.link"
@@ -137,6 +149,7 @@ export default {
         tabObj.start = tabFunc[i].start;
         tabObj.end = tabFunc[i].end;
         tabObj.link = tabFunc[i].link;
+        tabObj.room = tabFunc[i].room;
 
         finalTab.push(tabObj);
         hoursRemaining -= tabObj.coursLength;
@@ -146,6 +159,8 @@ export default {
       if (hoursRemaining) {
         finalTab.push({ type: "filler", coursLength: hoursRemaining });
       }
+
+      console.log(finalTab);
 
       return finalTab;
     },
@@ -185,7 +200,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   align-content: center;
   padding: 13px;
 
@@ -196,6 +211,11 @@ export default {
 .edt-prof a {
   transition: 0.3s;
   margin-right: 30px;
+}
+
+.room-small {
+  font-size: 10px;
+  margin: 0;
 }
 
 @media screen and (max-width: 400px) {
