@@ -120,12 +120,14 @@ export default {
         label: "SET_PERSON",
         data: JSON.parse(localStorage.getItem("user")),
       });
-      if (localStorage.getItem("userDate")) {
+      let isDate = localStorage.getItem("userDate").length > 2 ? true : false;
+
+      if (isDate) {
         this.formDate = JSON.parse(localStorage.getItem("userDate"));
       }
 
       setTimeout(() => {
-        !localStorage.getItem("userDate")
+        !isDate
           ? (this.prepareDate(this.formDate),
             this.fetchCurentWeekEdtdata(this.formatName(this.getPerson)))
           : this.fetchEdtdata(this.formatName(this.getPerson));
@@ -208,6 +210,7 @@ export default {
   border: solid 1px #e1e1e1;
 
   border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 .person-form section {

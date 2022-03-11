@@ -6,6 +6,7 @@
       :style="{ animationDelay: '0.3s' }"
     />
     <PersonForm />
+    <TeamsDetector />
 
     <article class="edt-container">
       <EdtReady v-if="getStatus == 'ready'" class="edt-case-animation" />

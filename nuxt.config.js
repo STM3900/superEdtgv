@@ -48,7 +48,7 @@ export default {
         imports: [
           {
             set: "@fortawesome/free-solid-svg-icons",
-            icons: ["faLink", "faStream"],
+            icons: ["faLink", "faStream", "faLightbulb"],
           },
           {
             set: "@fortawesome/free-brands-svg-icons",

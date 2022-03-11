@@ -160,8 +160,6 @@ export default {
         finalTab.push({ type: "filler", coursLength: hoursRemaining });
       }
 
-      console.log(finalTab);
-
       return finalTab;
     },
     getCoursLength(cours) {
