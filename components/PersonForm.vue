@@ -9,11 +9,21 @@
     <section>
       <div>
         <label for="firstname">Prénom</label>
-        <input type="text" id="firstname" v-model="firstNameForm" />
+        <input
+          type="text"
+          id="firstname"
+          v-model="firstNameForm"
+          v-on:keyup.enter="submitData"
+        />
       </div>
       <div>
         <label for="lastname">Nom</label>
-        <input type="text" id="lastname" v-model="lastNameForm" />
+        <input
+          type="text"
+          id="lastname"
+          v-model="lastNameForm"
+          v-on:keyup.enter="submitData"
+        />
       </div>
       <div>
         <label for="date">Date</label>
@@ -23,16 +33,14 @@
           date
           v-model="formDate"
           @change="prepareDate(formDate)"
+          v-on:keyup.enter="submitData"
         />
       </div>
     </section>
     <div>
       <button
         v-if="!formDate"
-        @click="
-          fetchCurentWeekEdtdata(formatName(getPerson));
-          saveName();
-        "
+        @click="submitData"
         :disabled="!getPersonFirstName || !getPersonLastName"
         :style="{
           background: getSelectedColor.normal,
@@ -44,10 +52,7 @@
       </button>
       <button
         v-else
-        @click="
-          fetchEdtdata(formatName(getPerson));
-          saveName();
-        "
+        @click="submitData"
         :disabled="!getPersonFirstName || !getPersonLastName"
         :style="{
           background: getSelectedColor.normal,
@@ -183,6 +188,12 @@ export default {
       });
       this.changeStatus("idle");
       localStorage.clear();
+    },
+    submitData() {
+      !this.formDate
+        ? this.fetchCurentWeekEdtdata(this.formatName(this.getPerson))
+        : this.fetchEdtdata(this.formatName(this.getPerson));
+      this.saveName();
     },
   },
 };
