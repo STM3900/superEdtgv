@@ -10,6 +10,7 @@
 
     <article class="edt-container">
       <EdtReady v-if="getStatus == 'ready'" class="edt-case-animation" />
+      <LoadingMessage v-if="getStatus == 'loading'" />
       <EdtLoading v-show="getStatus == 'loading'" class="edt-case-animation" />
       <EdtError v-if="getStatus == 'error'" class="edt-case-animation" />
       <EdtTable :formYear="formYear" />
