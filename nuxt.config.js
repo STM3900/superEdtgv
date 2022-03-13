@@ -12,7 +12,7 @@ export default {
         hid: "description",
         name: "description",
         content:
-          "Marre d'un edt moche ? Avec EDTGV, accéder à vos cours à tout instant, sans que ce soit moche.",
+          "Marre d'un edt moche ? Avec EDTGV, accéder à vos cours à tout instant, sans vous ruiner les yeux.",
       },
       { name: "format-detection", content: "telephone=no" },
       { name: "theme-color", content: "#93ceec" },

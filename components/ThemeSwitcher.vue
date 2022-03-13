@@ -22,6 +22,12 @@ export default {
   computed: {
     ...mapGetters(["getTheme"]),
   },
+  mounted() {
+    if (localStorage.getItem("theme")) {
+      this.icon = localStorage.getItem("theme") == "light" ? "sun" : "moon";
+      console.log(localStorage.getItem("theme"));
+    }
+  },
   methods: {
     ...mapActions(["changeTheme"]),
     toggleCurrentTheme() {
@@ -52,7 +58,7 @@ export default {
 }
 
 .light {
-  color: black;
+  color: rgb(150, 150, 150);
   transition: 0.3s;
 }
 
