@@ -9,6 +9,7 @@ export const state = () => ({
     lastname: "",
     date: "",
   },
+  theme: "light",
 });
 
 export const getters = {
@@ -47,6 +48,10 @@ export const getters = {
   getPersonDate: (state) => {
     return state.person.date;
   },
+
+  getTheme: (state) => {
+    return state.theme;
+  },
 };
 
 export const mutations = {
@@ -84,6 +89,10 @@ export const mutations = {
 
   SET_PERSON_DATE(state, date) {
     state.person.date = date;
+  },
+
+  SET_THEME(state, value) {
+    state.theme = value;
   },
 };
 

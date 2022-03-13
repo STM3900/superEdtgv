@@ -190,10 +190,12 @@ export default {
       localStorage.clear();
     },
     submitData() {
-      !this.formDate
-        ? this.fetchCurentWeekEdtdata(this.formatName(this.getPerson))
-        : this.fetchEdtdata(this.formatName(this.getPerson));
-      this.saveName();
+      if (this.getPersonFirstName && this.getPersonLastName) {
+        !this.formDate
+          ? this.fetchCurentWeekEdtdata(this.formatName(this.getPerson))
+          : this.fetchEdtdata(this.formatName(this.getPerson));
+        this.saveName();
+      }
     },
   },
 };
