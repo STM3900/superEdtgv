@@ -176,6 +176,12 @@ export default {
 </script>
 
 <style scoped>
+@-moz-document url-prefix() {
+  .edt-case {
+    margin-top: 30px;
+  }
+}
+
 .edt-time {
   font-size: 12px;
   padding: 13px;
