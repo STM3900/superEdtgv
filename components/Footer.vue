@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>
+    <p :class="`footer-${getTheme}`">
       Fait avec amour par
       <a href="https://theomigeat.com/" target="_blank" class="theo">Théo</a> -
       API par
@@ -20,7 +20,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Footer",
   computed: {
-    ...mapGetters(["getSelectedColor"]),
+    ...mapGetters(["getSelectedColor", "getTheme"]),
   },
 };
 </script>
@@ -29,10 +29,18 @@ export default {
 footer {
   margin-top: 50px;
   font-family: "Quicksand", sans-serif;
-  color: rgb(50, 50, 50);
   font-size: 14px;
   transition: 0.3s;
-  margin-bottom: 25px;
+  margin-bottom: 0;
+  padding-bottom: 25px;
+}
+
+.footer-light {
+  color: rgb(50, 50, 50);
+}
+
+.footer-dark {
+  color: rgb(175, 175, 175);
 }
 
 footer a {

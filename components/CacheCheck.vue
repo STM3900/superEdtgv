@@ -1,6 +1,8 @@
 <template>
   <div class="cache-class">
-    <label for="cacheCheckbox">Désactiver le cache</label>
+    <label for="cacheCheckbox" :class="`label-${getTheme}`"
+      >Désactiver le cache</label
+    >
     <input
       type="checkbox"
       id="cacheCheckbox"
@@ -20,7 +22,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["getCacheActivate", "getSelectedColor"]),
+    ...mapGetters(["getCacheActivate", "getSelectedColor", "getTheme"]),
     cacheActivateCheckbox: {
       get() {
         return this.getCacheActivate;
@@ -59,6 +61,15 @@ export default {
   margin: 0;
   font-size: 14px;
   margin-right: 5px;
+  transition: 0.3s;
+}
+
+.label-light {
+  color: black;
+}
+
+.label-dark {
+  color: rgb(220, 220, 220);
 }
 
 .cache-class input[type="checkbox"] {

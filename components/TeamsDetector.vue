@@ -1,6 +1,6 @@
 <template>
   <div v-if="getStatus == 'ready'">
-    <article v-if="checkSetCurrentTeams()">
+    <article v-if="checkSetCurrentTeams()" :class="`article-${getTheme}`">
       <fa
         class="icon-hint"
         icon="lightbulb"
@@ -10,7 +10,7 @@
       />
 
       <section>
-        <p>
+        <p :class="`p-${getTheme}`">
           {{ firstSentence }}
           <i class="capitalize">
             {{ capitalize(currentCours.subject) }}
@@ -64,7 +64,7 @@ export default {
     this.linkSentence = this.getRandom(this.linkSentenceList);
   },
   computed: {
-    ...mapGetters(["getEdtData", "getStatus", "getSelectedColor"]),
+    ...mapGetters(["getEdtData", "getStatus", "getSelectedColor", "getTheme"]),
   },
   methods: {
     capitalize(word) {
@@ -155,7 +155,7 @@ article {
   margin-top: 0;
 
   transition: 0.3s;
-  border: solid 1px #e1e1e1;
+  border: solid 1px;
 
   border-radius: 5px;
 
@@ -169,6 +169,14 @@ article {
   justify-content: flex-start;
   align-items: flex-start;
   align-content: center;
+}
+
+.article-light {
+  border-color: #e1e1e1;
+}
+
+.article-dark {
+  border-color: rgb(50, 50, 50);
 }
 
 article .icon-hint {

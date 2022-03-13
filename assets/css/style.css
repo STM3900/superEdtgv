@@ -1,7 +1,46 @@
 body {
-  margin-right: 10%;
-  margin-left: 10%;
   font-family: "Quicksand", sans-serif;
+  transition: 0.3s;
+  margin: 0;
+}
+
+main {
+  padding-right: 10%;
+  padding-left: 10%;
+  transition: 0.3s;
+  min-height: 100vh;
+}
+
+.main-light {
+  background: white;
+}
+
+.main-dark {
+  background: #191919;
+}
+
+h1 {
+  transition: 0.3s;
+}
+
+.h1-light {
+  color: black;
+}
+
+.h1-dark {
+  color: rgb(220, 220, 220);
+}
+
+p {
+  transition: 0.3s;
+}
+
+.p-light {
+  color: black;
+}
+
+.p-dark {
+  color: rgb(220, 220, 220);
 }
 
 .edt-case {
@@ -58,7 +97,6 @@ body {
 
 .edt-case div .cours > div > div {
   font-family: "Quicksand", sans-serif;
-  color: white;
   height: 100%;
 
   text-transform: capitalize;
@@ -99,9 +137,9 @@ body {
 }
 
 @media screen and (max-width: 1780px) {
-  body {
-    margin-right: 5%;
-    margin-left: 5%;
+  main {
+    padding-right: 5%;
+    padding-left: 5%;
   }
 }
 
@@ -112,9 +150,9 @@ body {
 }
 
 @media screen and (max-width: 1320px) {
-  body {
-    margin-right: 3%;
-    margin-left: 3%;
+  main {
+    padding-right: 3%;
+    padding-left: 3%;
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main :class="`main-${getTheme}`">
     <Header class="edt-case-animation" />
     <HeyMessage
       class="edt-case-animation"
@@ -15,7 +15,7 @@
       <EdtTable :formYear="formYear" />
     </article>
     <Footer class="edt-case-animation" />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ import PersonForm from "~/components/PersonForm.vue";
 export default {
   name: "IndexPage",
   computed: {
-    ...mapGetters(["getStatus"]),
+    ...mapGetters(["getStatus", "getTheme"]),
   },
   data() {
     return {
@@ -43,10 +43,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  font-family: "Quicksand", sans-serif;
-}
-
 /* edt */
 .edt-container {
   width: 100%;

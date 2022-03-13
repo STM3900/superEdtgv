@@ -9,7 +9,7 @@ export const state = () => ({
     lastname: "",
     date: "",
   },
-  theme: "light",
+  theme: "",
 });
 
 export const getters = {
@@ -157,7 +157,9 @@ export const actions = {
 
   changePerson(context, payload) {
     context.commit(payload.label, payload.data);
+  },
 
-    // payload.type == "firstname" ? context.commit("SET_PERSON_LASTNAME", payload.data) : payload.type == "lastname" ? context.commit("SET_PERSON_FIRSTNAME", payload.data);
+  changeTheme(context, value) {
+    context.commit("SET_THEME", value);
   },
 };

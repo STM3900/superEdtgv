@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>
+    <h1 :class="`h1-${getTheme}`">
       {{ greetingsBefore }}
       <span
         :style="{ color: getTextColor }"
@@ -70,7 +70,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getTogglePanel", "getPersonFirstName", "getSelectedColor"]),
+    ...mapGetters([
+      "getTogglePanel",
+      "getPersonFirstName",
+      "getSelectedColor",
+      "getTheme",
+    ]),
     getText() {
       return !this.getPersonFirstName ? "Toi" : this.getPersonFirstName;
     },

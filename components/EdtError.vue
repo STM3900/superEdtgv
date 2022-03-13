@@ -1,15 +1,17 @@
 <template>
   <section>
-    <h3>Pas de cours !</h3>
+    <h3 :class="`h3-${getTheme}`">Pas de cours !</h3>
     <p>(Ou alors mauvaise saisie)</p>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "EdtError",
-  data() {
-    return {};
+  computed: {
+    ...mapGetters(["getTheme"]),
   },
 };
 </script>
@@ -37,7 +39,15 @@ section h3 {
   font-family: "Quicksand", sans-serif;
   font-size: 20px;
   margin: 0;
+  transition: 0.3s;
+}
+
+.h3-light {
   color: rgb(50, 50, 50);
+}
+
+.h3-dark {
+  color: rgb(220, 220, 220);
 }
 
 section p {

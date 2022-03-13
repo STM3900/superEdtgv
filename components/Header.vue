@@ -1,20 +1,27 @@
 <template>
-  <header>
-    <h1>
+  <header :class="`header-${getTheme}`">
+    <h1 :class="`h1-${getTheme}`">
       Super ED<span :style="{ color: getSelectedColor.normal }"
         >TGV <fa class="icon-logo" icon="stream"
       /></span>
     </h1>
+    <ThemeSwitcher />
   </header>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Header",
   computed: {
-    ...mapGetters(["getSelectedColor"]),
+    ...mapGetters(["getSelectedColor", "getTheme"]),
+  },
+  mounted() {
+    this.changeTheme(localStorage.getItem("theme") ?? "light");
+  },
+  methods: {
+    ...mapActions(["changeTheme"]),
   },
 };
 </script>
@@ -22,14 +29,31 @@ export default {
 <style scoped>
 header {
   margin-bottom: 25px;
-  border-bottom: solid 1px #e1e1e1;
+  border-bottom: solid 1px;
   transition: 0.3s;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  transition: 0.3s;
+}
+
+.header-light {
+  border-color: #e1e1e1;
+}
+
+.header-dark {
+  border-color: rgb(50, 50, 50);
 }
 
 header h1 {
   font-family: "Quicksand", sans-serif;
   font-size: 18px;
   font-weight: 500;
+  margin-top: 0;
+  padding-top: 12px;
 }
 
 header h1 span {

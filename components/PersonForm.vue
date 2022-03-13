@@ -2,8 +2,8 @@
   <article
     :class="
       getTogglePanel
-        ? 'person-form-show person-form'
-        : 'person-form-hide person-form'
+        ? `person-form-show person-form person-form-${getTheme}`
+        : `person-form-hide person-form person-form-${getTheme}`
     "
   >
     <section>
@@ -65,7 +65,10 @@
       <button
         @click="resetStorage"
         :style="{
-          color: getSelectedColor.dark,
+          color:
+            getTheme == 'light'
+              ? getSelectedColor.dark
+              : getSelectedColor.normal,
           borderColor: getSelectedColor.normal,
         }"
       >
@@ -100,6 +103,7 @@ export default {
       "getPerson",
       "getPersonFirstName",
       "getPersonLastName",
+      "getTheme",
     ]),
 
     firstNameForm: {
@@ -220,10 +224,18 @@ export default {
   max-width: 725px;
 
   transition: 0.3s;
-  border: solid 1px #e1e1e1;
+  border: solid 1px;
 
   border-radius: 5px;
   margin-bottom: 15px;
+}
+
+.person-form-light {
+  border-color: #e1e1e1;
+}
+
+.person-form-dark {
+  border-color: rgb(50, 50, 50);
 }
 
 .person-form section {
@@ -254,15 +266,27 @@ export default {
 
 .person-form section input {
   font-family: "Quicksand", sans-serif;
+  background: none;
 
   /* haut | droit | bas | gauche */
   padding: 5px 2px 2px 2px;
 
   font-size: 16px;
   border: none;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px;
 
   outline: none;
+  transition: 0.3s;
+}
+
+.person-form-light section input {
+  border-color: #e1e1e1;
+  color: black;
+}
+
+.person-form-dark section input {
+  border-color: rgb(50, 50, 50);
+  color: rgb(220, 220, 220);
 }
 
 .person-form section input[type="date"] {
@@ -270,11 +294,30 @@ export default {
   padding: 4px 2px 1px 2px;
 }
 
+.person-form-dark ::-webkit-calendar-picker-indicator {
+  filter: invert(0.3);
+  transition: 0.3s;
+}
+
+.person-form-light ::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+  transition: 0.3s;
+}
+
 .person-form section label {
   font-family: "Quicksand", sans-serif;
   position: absolute;
   top: -8px;
   font-size: 10px;
+  transition: 0.3s;
+}
+
+.person-form-light section label {
+  color: black;
+}
+
+.person-form-dark section label {
+  color: rgb(220, 220, 220);
 }
 
 .person-form button {
@@ -289,6 +332,11 @@ export default {
   border: solid 1px;
 
   margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.person-form-dark button {
+  opacity: 1;
 }
 
 .person-form button:disabled {

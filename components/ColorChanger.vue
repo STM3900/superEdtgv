@@ -5,7 +5,7 @@
       :key="color.normal"
       type="radio"
       :id="`radio${i}`"
-      :class="`color${i + 1} color-radio`"
+      :class="`color${i + 1} color-radio color-radio-${getTheme}`"
       :value="color"
       v-model="selectedColorForm"
       @change="saveColor"
@@ -69,7 +69,7 @@ export default {
     );
   },
   computed: {
-    ...mapGetters(["getSelectedColor"]),
+    ...mapGetters(["getSelectedColor", "getTheme"]),
     selectedColorForm: {
       get() {
         return this.getSelectedColor;
@@ -121,6 +121,14 @@ export default {
   visibility: visible;
   transition: 0.3s;
   border: 2px solid white;
+}
+
+.color-radio-light:after {
+  border-color: white;
+}
+
+.color-radio-dark:after {
+  border-color: #191919;
 }
 
 .color-radio:checked:after {

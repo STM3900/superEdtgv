@@ -2,7 +2,7 @@
   <table>
     <thead>
       <th>&nbsp;</th>
-      <th v-for="(day, i) in weekDays" :key="day">
+      <th v-for="(day, i) in weekDays" :key="day" :class="`p-${getTheme}`">
         <span :style="{ animationDelay: `${0.3 + 0.07 * i}s` }">
           {{ day }}
         </span>
@@ -13,13 +13,13 @@
         >
       </th>
     </thead>
-    <tbody>
+    <tbody :class="`edt-${getTheme}`">
       <tr v-for="i in 12" :key="i">
         <td
           class="table-hours"
           :style="{ animationDelay: `${0.4 + 0.07 * i}s` }"
         >
-          <p>{{ i + 7 }}h</p>
+          <p :class="`p-${getTheme}`">{{ i + 7 }}h</p>
         </td>
         <td v-for="i in 5" :key="i" class="table-normal-columns"></td>
       </tr>
@@ -39,7 +39,7 @@ export default {
     return { weekDays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"] };
   },
   computed: {
-    ...mapGetters(["getStatus", "getEdtData"]),
+    ...mapGetters(["getStatus", "getEdtData", "getTheme"]),
   },
   methods: {
     getDateOfISOWeek(w, y) {
@@ -109,7 +109,16 @@ tbody tr td {
 }
 
 tbody tr td:not(:last-child) {
-  border-right: solid 1px #e1e1e1;
+  border-right: solid 1px;
+  transition: 0.3s;
+}
+
+.edt-light tr td:not(:last-child) {
+  border-color: #e1e1e1;
+}
+
+.edt-dark tr td:not(:last-child) {
+  border-color: rgb(50, 50, 50);
 }
 
 tbody tr td:first-child {
