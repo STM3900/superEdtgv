@@ -101,21 +101,22 @@ export default {
     },
     checkIfActiveCours(cours) {
       const now = new Date();
+
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
 
+      const coursStart = this.convertCoursTimeToInt(cours.start);
+      const coursEnd = this.convertCoursTimeToInt(cours.end);
+
       let isActive = false;
+      console.log(cours.link);
 
       if (
-        (currentHour >= this.convertCoursTimeToInt(cours.start) &&
-          currentHour < this.convertCoursTimeToInt(cours.end)) ||
-        (this.convertCoursTimeToInt(cours.start) == currentHour - 1 &&
-          currentMinute >= 45)
+        (currentHour >= coursStart && currentHour < coursEnd) ||
+        (currentHour == coursStart - 1 && currentMinute >= 45 && cours.link)
       ) {
-        if (cours.link) {
-          isActive = true;
-          this.currentCours = cours; // pas super propre mais ça ira
-        }
+        isActive = true;
+        this.currentCours = cours; // pas super propre mais ça ira
       }
 
       if (
