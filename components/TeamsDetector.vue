@@ -112,8 +112,9 @@ export default {
       console.log(cours.link);
 
       if (
-        (currentHour >= coursStart && currentHour < coursEnd) ||
-        (currentHour == coursStart - 1 && currentMinute >= 45 && cours.link)
+        cours.link &&
+        ((currentHour >= coursStart && currentHour < coursEnd) ||
+          (currentHour == coursStart - 1 && currentMinute >= 45))
       ) {
         isActive = true;
         this.currentCours = cours; // pas super propre mais ça ira
