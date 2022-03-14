@@ -110,11 +110,12 @@ export default {
         (currentHour >= this.convertCoursTimeToInt(cours.start) &&
           currentHour < this.convertCoursTimeToInt(cours.end)) ||
         (this.convertCoursTimeToInt(cours.start) == currentHour - 1 &&
-          currentMinute >= 45 &&
-          cours.link)
+          currentMinute >= 45)
       ) {
-        isActive = true;
-        this.currentCours = cours; // pas super propre mais ça ira
+        if (cours.link) {
+          isActive = true;
+          this.currentCours = cours; // pas super propre mais ça ira
+        }
       }
 
       if (
