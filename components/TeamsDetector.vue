@@ -109,7 +109,6 @@ export default {
       const coursEnd = this.convertCoursTimeToInt(cours.end);
 
       let isActive = false;
-      console.log(cours.link);
 
       if (
         cours.link &&

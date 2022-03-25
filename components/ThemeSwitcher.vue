@@ -25,7 +25,6 @@ export default {
   mounted() {
     if (localStorage.getItem("theme")) {
       this.icon = localStorage.getItem("theme") == "light" ? "sun" : "moon";
-      console.log(localStorage.getItem("theme"));
     }
   },
   methods: {
