@@ -74,5 +74,9 @@ export default {
   .edt-container {
     overflow: auto;
   }
+
+  .edt-container::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>
