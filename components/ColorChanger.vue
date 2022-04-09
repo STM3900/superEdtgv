@@ -6,6 +6,7 @@
       type="radio"
       :id="`radio${i}`"
       :class="`color${i + 1} color-radio color-radio-${getTheme}`"
+      class="unselectable"
       :value="color"
       v-model="selectedColorForm"
       @change="saveColor"

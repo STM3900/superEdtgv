@@ -108,6 +108,13 @@ p {
   align-content: center;
 }
 
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 @keyframes fadeIn {
   0% {
     transform: translateX(-5px);

@@ -35,7 +35,10 @@
               <span>
                 {{ tab.professor }}
                 <p v-if="tab.coursLength > 1" class="room-small">
-                  {{ tab.room }}
+                  <fa
+                    class="icon-room"
+                    :icon="['fas', `${getCoursIcon(tab.room)}`]"
+                  />{{ tab.room }}
                 </p>
               </span>
               <a
@@ -75,6 +78,9 @@ export default {
     ...mapGetters(["getEdtData", "getSelectedColor"]),
   },
   methods: {
+    getCoursIcon(cours) {
+      return cours.includes("'O") ? "building" : "school";
+    },
     getreference(ref) {
       return this.referenceTable[ref];
     },
@@ -220,6 +226,11 @@ export default {
 .room-small {
   font-size: 10px;
   margin: 0;
+}
+
+.icon-room {
+  margin-right: 5px;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 400px) {

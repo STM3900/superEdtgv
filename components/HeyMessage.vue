@@ -4,6 +4,7 @@
       {{ greetingsBefore }}
       <span
         :style="{ color: getTextColor }"
+        class="unselectable"
         @click="
           changeTogglePanel(!getTogglePanel);
           savePanel();
