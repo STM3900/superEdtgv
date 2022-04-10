@@ -54,9 +54,9 @@ export default {
               "faLightbulb",
               "faSun",
               "faMoon",
-              "faGraduationCap",
               "faBuilding",
               "faSchool",
+              "faCalendar",
             ],
           },
           {

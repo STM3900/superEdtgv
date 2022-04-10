@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="unselectable">
+    <ExportCalendar :status="statusCalendar" />
     <fa
       @click="toggleCurrentTheme()"
       :class="`icon-theme ${getTheme} ${status ? 'show' : 'hide'}`"
@@ -17,6 +18,7 @@ export default {
     return {
       icon: "sun",
       status: true,
+      statusCalendar: true,
     };
   },
   computed: {
@@ -41,6 +43,13 @@ export default {
           this.status = true;
         }, 150);
       }, 150);
+
+      setTimeout(() => {
+        this.statusCalendar = false;
+        setTimeout(() => {
+          this.statusCalendar = true;
+        }, 300);
+      }, 50);
     },
   },
 };
@@ -49,6 +58,7 @@ export default {
 <style scoped>
 .icon-theme {
   transition: 0.3s;
+  margin-left: 10px;
 }
 
 .icon-theme:hover {
