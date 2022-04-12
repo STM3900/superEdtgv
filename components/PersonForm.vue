@@ -23,6 +23,7 @@
           id="lastname"
           v-model="lastNameForm"
           v-on:keyup.enter="submitData"
+          v-on:input="testCalender"
         />
       </div>
       <div>
@@ -150,6 +151,7 @@ export default {
       "fetchEdtdata",
       "changeSelectedColor",
       "changePerson",
+      "changeViewStatusCalendar",
     ]),
     prepareDate(date) {
       // MM-JJ-AA
@@ -199,6 +201,11 @@ export default {
           ? this.fetchCurentWeekEdtdata(this.formatName(this.getPerson))
           : this.fetchEdtdata(this.formatName(this.getPerson));
         this.saveName();
+      }
+    },
+    testCalender() {
+      if (!this.getPersonLastName) {
+        this.changeViewStatusCalendar(false);
       }
     },
   },

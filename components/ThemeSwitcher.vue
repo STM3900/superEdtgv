@@ -1,6 +1,12 @@
 <template>
   <div class="unselectable">
-    <ExportCalendar :status="statusCalendar" />
+    <fa
+      @click="toggleViewCalendar"
+      :class="`icon-theme calendar ${getTheme} ${
+        statusCalendar ? 'show' : 'hide'
+      } ${getPerson.firstname && getPerson.lastname ? '' : 'inactive'}`"
+      :icon="['fas', 'calendar']"
+    />
     <fa
       @click="toggleCurrentTheme()"
       :class="`icon-theme ${getTheme} ${status ? 'show' : 'hide'}`"
@@ -11,6 +17,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import vClickOutside from "v-click-outside";
 
 export default {
   name: "ThemeSwitcher",
@@ -22,7 +29,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getTheme"]),
+    ...mapGetters(["getTheme", "getViewStatusCalendar", "getPerson"]),
   },
   mounted() {
     if (localStorage.getItem("theme")) {
@@ -30,7 +37,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["changeTheme"]),
+    ...mapActions(["changeTheme", "changeViewStatusCalendar"]),
     toggleCurrentTheme() {
       const theme = this.getTheme == "light" ? "dark" : "light";
       this.changeTheme(theme);
@@ -50,6 +57,13 @@ export default {
           this.statusCalendar = true;
         }, 300);
       }, 50);
+    },
+    toggleViewCalendar() {
+      if (this.getPerson.firstname && this.getPerson.lastname) {
+        setTimeout(() => {
+          this.changeViewStatusCalendar(!this.getViewStatusCalendar);
+        }, 1);
+      }
     },
   },
 };
@@ -80,6 +94,17 @@ export default {
   opacity: 1;
   animation: fadeIn 0.15s ease;
   transition: 0.3s;
+}
+
+.inactive {
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.inactive:hover {
+  transition: 0.3s;
+  cursor: auto;
+  transform: rotate(0deg);
 }
 
 .hide {

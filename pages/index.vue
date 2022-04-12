@@ -7,6 +7,9 @@
     />
     <PersonForm />
     <TeamsDetector />
+    <div class="export-calendar">
+      <ExportCalendar />
+    </div>
 
     <article class="edt-container">
       <EdtReady v-if="getStatus == 'ready'" class="edt-case-animation" />

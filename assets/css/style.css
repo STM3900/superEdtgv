@@ -2,6 +2,8 @@ body {
   font-family: "Quicksand", sans-serif;
   transition: 0.3s;
   margin: 0;
+
+  overflow-x: hidden;
 }
 
 main {
@@ -9,6 +11,9 @@ main {
   padding-left: 10%;
   transition: 0.3s;
   min-height: 100vh;
+  overflow-x: hidden;
+
+  position: relative;
 }
 
 .main-light {

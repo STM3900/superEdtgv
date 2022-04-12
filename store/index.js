@@ -10,6 +10,7 @@ export const state = () => ({
     date: "",
   },
   theme: "",
+  viewStatusCalendar: true,
 });
 
 export const getters = {
@@ -52,6 +53,10 @@ export const getters = {
   getTheme: (state) => {
     return state.theme;
   },
+
+  getViewStatusCalendar: (state) => {
+    return state.viewStatusCalendar;
+  },
 };
 
 export const mutations = {
@@ -93,6 +98,10 @@ export const mutations = {
 
   SET_THEME(state, value) {
     state.theme = value;
+  },
+
+  SET_VIEW_STATUS_CALENDAR(state, value) {
+    state.viewStatusCalendar = value;
   },
 };
 
@@ -161,5 +170,9 @@ export const actions = {
 
   changeTheme(context, value) {
     context.commit("SET_THEME", value);
+  },
+
+  changeViewStatusCalendar(context, value) {
+    context.commit("SET_VIEW_STATUS_CALENDAR", value);
   },
 };
