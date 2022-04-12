@@ -19,7 +19,7 @@ export default {
         "Vénus met plus de temps à faire un tour sur elle-même qu'à faire le tour du Soleil (243 jours contre 225)",
         "Le cœur de la Terre est plus chaud que la surface du Soleil (😳)",
         "Mercure peut varier de température de 600°C d'écart entre le jour et la nuit",
-        "Mars abrite la plus haut sommet du système solaire, et celui-ci fait 3x celui de l'Everest (26km de haut)",
+        "Mars abrite le plus haut sommet du système solaire, et celui-ci fait 3x celui de l'Everest (26km de haut)",
         "Il y a plus d'étoiles dans l'Univers que de grains de sable sur la Terre",
         "Il pleut presque tout le temps sur Vénus. Par contre la pluie c'est de l'acide sulfurique ^^",
         "Les bulles ne peuvent pas exister dans l'espace :(",
