@@ -10,7 +10,7 @@ export const state = () => ({
     date: "",
   },
   theme: "",
-  viewStatusCalendar: true,
+  viewStatusCalendar: false,
 });
 
 export const getters = {
