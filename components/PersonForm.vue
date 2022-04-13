@@ -130,17 +130,10 @@ export default {
         label: "SET_PERSON",
         data: JSON.parse(localStorage.getItem("user")),
       });
-      let isDate = localStorage.getItem("userDate").length > 2 ? true : false;
-
-      if (isDate) {
-        this.formDate = JSON.parse(localStorage.getItem("userDate"));
-      }
 
       setTimeout(() => {
-        !isDate
-          ? (this.prepareDate(this.formDate),
-            this.fetchCurentWeekEdtdata(this.formatName(this.getPerson)))
-          : this.fetchEdtdata(this.formatName(this.getPerson));
+        this.prepareDate(this.formDate);
+        this.fetchCurentWeekEdtdata(this.formatName(this.getPerson));
       }, 1000);
     }
   },
@@ -178,7 +171,6 @@ export default {
     },
     saveName() {
       localStorage.setItem("user", JSON.stringify(this.getPerson));
-      localStorage.setItem("userDate", JSON.stringify(this.formDate));
     },
     resetStorage() {
       this.changePerson({
