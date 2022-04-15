@@ -1,5 +1,6 @@
 <template>
   <main :class="`main-${getTheme}`">
+    <Overlay />
     <Header class="edt-case-animation" />
     <HeyMessage
       class="edt-case-animation"
@@ -24,13 +25,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import ColorChanger from "~/components/ColorChanger.vue";
-import PersonForm from "~/components/PersonForm.vue";
 
 export default {
   name: "IndexPage",
   computed: {
-    ...mapGetters(["getStatus", "getTheme"]),
+    ...mapGetters(["getStatus", "getTheme", "getViewStatusCalendar"]),
   },
   data() {
     return {
