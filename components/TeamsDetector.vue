@@ -23,6 +23,7 @@
             :style="{
               color: getSelectedColor.normal,
             }"
+            target="_blank"
             >ici</a
           >
           !
