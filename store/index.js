@@ -11,6 +11,7 @@ export const state = () => ({
   },
   theme: "",
   viewStatusCalendar: false,
+  currentYear: "",
 });
 
 export const getters = {
@@ -57,6 +58,10 @@ export const getters = {
   getViewStatusCalendar: (state) => {
     return state.viewStatusCalendar;
   },
+
+  getCurrentYear: (state) => {
+    return state.currentYear;
+  }
 };
 
 export const mutations = {
@@ -103,6 +108,10 @@ export const mutations = {
   SET_VIEW_STATUS_CALENDAR(state, value) {
     state.viewStatusCalendar = value;
   },
+
+  SET_CURRENT_YEAR(state, value) {
+    state.currentYear = value;
+  }
 };
 
 export const actions = {
@@ -175,4 +184,8 @@ export const actions = {
   changeViewStatusCalendar(context, value) {
     context.commit("SET_VIEW_STATUS_CALENDAR", value);
   },
+
+  changeCurrentYear(context, year) {
+    context.commit("SET_CURRENT_YEAR", year);
+  }
 };

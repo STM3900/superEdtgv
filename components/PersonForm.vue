@@ -92,7 +92,7 @@ export default {
   data() {
     return {
       formDate: "",
-      formYear: "2022",
+      formYear: "",
     };
   },
 
@@ -105,6 +105,7 @@ export default {
       "getPersonFirstName",
       "getPersonLastName",
       "getTheme",
+      "getCurrentYear"
     ]),
 
     firstNameForm: {
@@ -136,6 +137,8 @@ export default {
         this.fetchCurentWeekEdtdata(this.formatName(this.getPerson));
       }, 1000);
     }
+
+    this.formYear = this.getCurrentYear;
   },
   methods: {
     ...mapActions([
@@ -178,7 +181,7 @@ export default {
         data: { firstname: "", lastname: "", date: "" },
       });
       this.formDate = "";
-      this.formYear = "2022";
+      this.formYear = this.getCurrentYear;
       this.changeSelectedColor({
         normal: "hsl(200, 70%, 75%)",
         dark: "hsl(200, 70%, 15%)",
