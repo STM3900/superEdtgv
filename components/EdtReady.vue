@@ -123,6 +123,9 @@ export default {
       let minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
       return hours + minutes / 60;
     },
+    detectM(str) {
+      return /zanconi|Zanconi|Marcelo|Marcello|marcelo|marcello/.test(str) ? "Le M" : str
+    },
     generateTab(tab) {
       const tabFunc = tab.slice();
       const finalTab = [];
@@ -151,7 +154,7 @@ export default {
         tabObj.type = "cours";
         tabObj.coursLength = this.getCoursLength(tabFunc[i]);
         tabObj.subject = tabFunc[i].subject;
-        tabObj.professor = this.truncateProfTag(tabFunc[i].professor);
+        tabObj.professor = this.detectM(this.truncateProfTag(tabFunc[i].professor)); 
         tabObj.start = tabFunc[i].start;
         tabObj.end = tabFunc[i].end;
         tabObj.link = tabFunc[i].link;
