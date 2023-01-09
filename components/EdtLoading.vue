@@ -7,7 +7,7 @@
         class="placeholder"
       >
         <div v-if="item">
-          <content-placeholders :rounded="true">
+          <content-placeholders :class="getTheme == 'light' ? 'loading' : 'dark-loading loading'" :rounded="true">
             <content-placeholders-heading :img="false" />
             <content-placeholders-text :lines="2" />
           </content-placeholders>
@@ -25,10 +25,15 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "EdtLoading",
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters(["getTheme"]),
   },
   methods: {
     getRandomPlaceHolder() {
@@ -39,6 +44,14 @@ export default {
 </script>
 
 <style scoped>
+.loading {
+  transition: 0.3s;
+}
+
+.dark-loading {
+  filter: invert(1);
+}
+
 .edt-case div .placeholder {
   width: 100%;
   margin-bottom: 1px;
