@@ -29,13 +29,18 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "IndexPage",
   computed: {
-    ...mapGetters(["getStatus", "getTheme", "getViewStatusCalendar", "getCurrentYear"]),
+    ...mapGetters([
+      "getStatus",
+      "getTheme",
+      "getViewStatusCalendar",
+      "getCurrentYear",
+    ]),
   },
   methods: {
     ...mapActions(["changeCurrentYear"]),
   },
   mounted() {
-    this.changeCurrentYear("2023");
+    this.changeCurrentYear(new Date().getFullYear());
     this.formYear = this.getCurrentYear;
   },
   data() {
