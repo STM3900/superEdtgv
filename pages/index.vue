@@ -40,7 +40,7 @@ export default {
     ...mapActions(["changeCurrentYear"]),
   },
   mounted() {
-    this.changeCurrentYear(new Date().getFullYear());
+    this.changeCurrentYear(new Date().getFullYear().toString());
     this.formYear = this.getCurrentYear;
   },
   data() {
