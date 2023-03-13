@@ -1,7 +1,7 @@
 <template>
   <div class="cache-class">
     <label for="cacheCheckbox" :class="`label-${getTheme}`"
-      >Désactiver le cache</label
+      >Activer le cache ?</label
     >
     <input
       type="checkbox"

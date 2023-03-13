@@ -126,7 +126,7 @@ export const actions = {
         `https://api-calendar.calendz.app/v1/week?firstname=${
           payload.firstname
         }&lastname=${payload.lastname}${
-          context.state.cacheActivate ? "&ignoreCache=true" : ""
+          context.state.cacheActivate ? "" : "&ignoreCache=true"
         }`
       )
       .then((response) => {
@@ -147,7 +147,7 @@ export const actions = {
         `https://api-calendar.calendz.app/v1/week/${payload.date}?firstname=${
           payload.firstname
         }&lastname=${payload.lastname}${
-          context.state.cacheActivate ? "&ignoreCache=true" : ""
+          context.state.cacheActivate ? "" : "&ignoreCache=true"
         }`
       )
       .then((response) => {
